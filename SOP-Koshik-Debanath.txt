@@ -1,0 +1,82 @@
+\documentclass[12pt,letterpaper]{article} % Standard class, 12pt font, letter paper
+
+% PACKAGES FOR FORMATTING AND ENCODING
+\usepackage[utf8]{inputenc} % Allows direct input of UTF-8 characters
+\usepackage[T1]{fontenc}    % Ensures proper font encoding and hyphenation
+\usepackage{geometry}       % For setting page margins
+\geometry{letterpaper, margin=1in} % Standard 1-inch margins
+
+% PACKAGE FOR PARAGRAPH SPACING (optional, but common for SOPs)
+\usepackage{parskip}        % Creates space between paragraphs instead of indentation
+\setlength{\parskip}{1em}   % Adjust the space as needed (e.g., 0.5em, 1em)
+\setlength{\parindent}{0pt} % No paragraph indentation when using parskip
+
+% PACKAGE FOR HYPERLINKS (if you want to add any clickable links, e.g., to LinkedIn or publications)
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,      % Color of internal links
+    urlcolor=blue,       % Color of external links (like URLs)
+    pdftitle={Statement of Purpose - Koshik Debanath},
+    pdfauthor={Koshik Debanath},
+}
+
+% OPTIONAL: For a more traditional academic font like Times New Roman
+% \usepackage{mathptmx} % Or \usepackage{times}
+
+% --- DOCUMENT START ---
+\begin{document}
+
+% You can have a title block, but for an SOP, often just your name at the top or bottom is fine.
+% If you want a title:
+% \title{Statement of Purpose}
+% \author{Koshik Debanath}
+% \date{\today} % Or specific date like: September 26, 2023, or leave it blank with \date{}
+% \maketitle
+% \vspace{1em} % Add some space after the title if you use it
+
+% Alternatively, a simple centered name:
+\begin{center}
+    \Large{\textbf{Koshik Debanath}} \\ % Your name, large and bold
+    \normalsize{Statement of Purpose}    % Subtitle
+    % You can add contact information here if desired:
+    % \normalsize{your.email@example.com} \\
+    % \normalsize{+1-234-567-8900} \\
+    % \normalsize{\href{https://www.linkedin.com/in/yourprofile/}{LinkedIn Profile}}
+\end{center}
+\vspace{1em} % Space after the header
+
+I am Koshik Debanath, a Computer Science graduate from Rajshahi University of Engineering \& Technology, Bangladesh. Over the last few years, I have gathered a strong interest in artificial intelligence, especially in the fields of Natural Language Processing (NLP), Computer Vision, Machine Learning, Deep Learning, and Generative AI. With multiple peer-reviewed publications, deep industry exposure, and a growing desire to contribute meaningful solutions to real-world problems, I now seek to pursue a PhD to deepen my research capabilities and expand the impact of my work.
+
+My research journey began with a personal turning point --- an ACL injury I experienced during my undergraduate years. While undergoing treatment and rehabilitation, I became curious about how medical imaging and AI could be used together to assist diagnosis. This experience inspired my first research project, where I developed an attention-based deep learning model to classify knee injuries from MRI scans. I served as the first author on this work, which was later accepted at the \textit{ICCIT 2023} conference. That experience not only grounded my technical learning but also showed me how AI can make a real difference in people’s lives.
+
+Motivated by that, I continued to explore diverse topics in AI. I am the first author of two more accepted papers: one on low-resource NLP using \textit{LLaMA} for Bengali question answering, and another that uses machine learning to analyze bot activity and misinformation in the context of the 2024 U.S. Presidential Election. In addition to those, I have contributed as a second author to several other research efforts --- including Bengali language classification using multilingual \textit{BERT} and a study on AI vs human-written text using explainable models. All of these papers have been accepted at reputable conferences like \textit{ECCE 2025} and \textit{NCIM 2025}.
+
+Beyond academia, I’ve worked remotely as a Data Scientist at Manaknightdigital Inc. in Canada, where I applied Large Language Models (LLMs) in real-world systems. I’ve built financial chatbots with RAG, fraud detection models, image-based appraisal platforms using \textit{CLIP}, and a multimodal tender-matching system powered by \textit{LLaMA-2} and \textit{GPT-4}. More recently, I joined Universal Machine Inc. as a Software Engineer, where I’m building an AI-enhanced YouTube Live bot and Chrome extension. These projects have strengthened my understanding of both research and production-level deployment.
+
+My core research interests lie in developing robust and interpretable language models, especially for low-resource languages and misinformation detection. I am also intrigued by cross-modal systems that combine text, image, and user context --- something I’ve touched on in both academic and industry work. I want my research to contribute to open-source tools and practical systems that serve both technical and social goals.
+
+% !!! IMPORTANT REMINDER FROM PREVIOUS REVIEW !!!
+% THIS IS WHERE YOU NEED TO ADD THE CUSTOMIZED PARAGRAPH FOR EACH UNIVERSITY/PROGRAM.
+% Explain:
+% - Why THIS specific program/university?
+% - Which professor(s) you want to work with and WHY (mention their specific research).
+% - How your background aligns with their work.
+% - What specific resources/labs/courses at the university attract you.
+%
+% Example placeholder:
+% I am particularly drawn to the PhD program at [University Name] because of its renowned research in [Specific Area like NLP or Ethical AI]. Professor [Professor's Name]'s work on [mention specific project/paper] deeply aligns with my interests in [your interest, e.g., low-resource NLP]. My experience with [your relevant experience, e.g., LLaMA for Bengali] would allow me to contribute effectively to their ongoing projects, such as [mention another of their projects or a potential future direction]. Furthermore, the [Specific Lab/Center/Initiative at the University] offers an exciting environment for collaborative research.
+% (END OF CUSTOMIZATION SECTION)
+
+Looking ahead, I see a PhD as the natural next step --- one that will allow me to focus deeply on problem-solving, explore emerging AI methods, and collaborate with world-class researchers. I’m particularly drawn to labs that support open innovation and work on NLP, ethical AI, and applied machine learning.
+
+Thank you for considering my application. I look forward to the possibility of contributing to your research group.
+
+Sincerely,
+
+\vspace{2em} % Add some vertical space before your typed name (could be for a signature if printed)
+
+Koshik Debanath
+
+\end{document}
+% --- DOCUMENT END ---
