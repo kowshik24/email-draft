@@ -14,19 +14,22 @@ Tools & Platforms: Git, Docker, CI/CD, MLOps, MySQL, MongoDB, SQLite, Django, Fl
 AI/ML: PyTorch, TensorFlow, scikit-learn, OpenCV, NLP (LLMs, Fine Tuning, Prompt Engineering), Computer
 Vision, Time Series Analysis, Generative AI, Data Mining
 Publications
-• An Attention-Based Deep Learning Approach to Knee Injury Classification from MRI Images. 2023 26th
-International Conference on Computer and Information Technology (ICCIT).
-• Advancing Low-Resource NLP: Contextual Question Answering for Bengali Language Using Llama. Accepted, To
-appear in 2025 International Conference on Electrical, Computer and Communication Engineering (ECCE).
-• Distinguishing Between Formal and Colloquial: A Multilingual BERT Approach to Bengali Language Classification.
-Accepted, To appear in 2025 International Conference on Electrical, Computer and Communication Engineering
-(ECCE).
-• Analyzing Bot Activity and Political Discourse in the 2024 U.S. Presidential Election: A Machine Learning Approach
-to Misinformation and Manipulation. Accepted, To appear in 2nd International Conference on Next-Generation
-Computing, IoT and Machine Learning (NCIM-2025).
-• Distinguishing Human-Written and AI-Generated Text: A Comprehensive Study Using Explainable Artificial
-Intelligence in Text Classification. Accepted, To appear in 2nd International Conference on Next-Generation
-Computing, IoT and Machine Learning (NCIM-2025).
+• K. D. Nath, A. F. M. M. Rahman and M. A. Hossain, “An Attention-Based Deep Learning Approach to Knee
+Injury Classification from MRI Images,” 2023 26th International Conference on Computer and Information
+Technology (ICCIT), Cox’s Bazar, Bangladesh, 2023, pp. 1-6, doi: 10.1109/ICCIT60459.2023.10441340.
+• K. Debanath, S. Aich and A. Y. Srizon, “Advancing Low-Resource NLP: Contextual Question Answering for
+Bengali Language Using Llama,” 2025 International Conference on Electrical, Computer and Communication
+Engineering (ECCE), Chittagong, Bangladesh, 2025, pp. 1-6, doi: 10.1109/ECCE64574.2025.11013841.
+• S. Aich, K. Debanath and A. Y. Srizon, “Distinguishing Between Formal and Colloquial: A Multilingual BERT
+Approach to Bengali Language Classification,” 2025 International Conference on Electrical, Computer and
+Communication Engineering (ECCE), Chittagong, Bangladesh, 2025, pp. 1-6, doi:
+10.1109/ECCE64574.2025.11013999
+• K. Debanath, S. Aich and A. Y. Srizon, “Analyzing Bot Activity and Political Discourse in the 2024 U.S.
+Presidential Election: A Machine Learning Approach to Misinformation and Manipulation,” Accepted, To appear
+in 2nd International Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025).
+• S. Aich, K. Debanath, and A. Y. Srizon, “Distinguishing Human-Written and AI-Generated Text: A
+Comprehensive Study Using Explainable Artificial Intelligence in Text Classification,” Accepted, To appear in 2nd
+International Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025).
 Experience
 Manaknightdigital Inc.
 Toronto, Ontario, Canada (Remote)
@@ -46,10 +49,10 @@ lenders.
 ∗ Improved data retrieval accuracy by 25%
 ∗ Applied Beautiful Soup and PyPDF2 for data scraping and processing.
 Sports Data Analysis ChatBot:
-∗ Scraped and analyzed football data to predict match outcomes.
-∗ Integrated RAG and Pinecone for efficient data querying and vector database management.
+∗ Scraped and analyzed football data to predict match outcomes.• ∗ Integrated RAG and Pinecone for efficient data querying and vector database management.
 ∗ Employed Beautiful Soup and PyPDF2 for data collection, analyzing 2 million football data points to achieve a
-90% prediction accuracy, supporting strategic betting decisions.• Custom Image Generation System:
+90% prediction accuracy, supporting strategic betting decisions.
+Custom Image Generation System:
 • ∗ Developed an image generation platform using Stable Diffusion.
 ∗ Fine-tuned custom models to generate images based on user-defined presets.
 ∗ Utilized PyTorch and transformers for model training and deployment and finally used Docker for
@@ -93,16 +96,14 @@ Predicting House Prices in Bengaluru: 24th Rank Out Of 2885 with Accuracy of 87%
 Subscriber Prediction Talent Search Hackathon: Rank: 26th Out Of 5045.
 Analytics Olympiad 2022: Rank: 82 Out Of 1029.
 Data Science Student Championship - South Zone: Rank: 73rd Out of 554.
-Decoding Discourse - AI vs Human: Rank: 5th Out of 293.
-Projects
+Decoding Discourse - AI vs Human: Rank: 5th Out of 293.Projects
 Bangladesh Stock Price Forecast | App
 • Goal: Forecasting Stock Price of Bangladesh by using LSTM (Long Short-Term Memory) networks
 • Library: pandas, numpy, matplotlib, bdshare, keras, streamlit, and plotly
-UberRidePrediction | PyPi | WebApp•
-•
-Goal: UberRidePrediction is a Python module designed to predict Uber ride prices based on factors like location
+UberRidePrediction | PyPi | WebApp
+• Goal: UberRidePrediction is a Python module designed to predict Uber ride prices based on factors like location
 coordinates, number of passengers, and ride time using machine learning algorithms(Xgboost).
-Library: scikit-learn, CI/CD Pipeline, FastAPI
+• Library: scikit-learn, CI/CD Pipeline, FastAPI
 PineconeUtils | PyPi
 • Goal: PineconeUtils is a Python module designed to handle and process data for embedding and indexing using
 Pinecone, Cohere, and OpenAI services for applications involving text embedding and retrieval augmented
