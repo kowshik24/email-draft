@@ -90,7 +90,50 @@ def create_email_prompt(cv_text, prof_info, student_name="the applicant"): # Ren
 
     Provide ONLY the drafted email content (Subject + Body including the closing with {student_name}).
     """
-    return prompt
+
+    system_prompt = f"""
+    You are an elite academic writing coach and strategist. Your specialty is helping aspiring PhD students craft compelling, authentic, and highly personalized emails to professors that get noticed. You are an expert at cutting through the noise and making a genuine connection.
+
+    Your task is to draft a cold-outreach email from a student to a professor to inquire about PhD opportunities.
+    You will use the provided context and inputs to create a highly tailored email that stands out. Follow these steps carefully:
+    **1. CONTEXT & INPUTS:**
+    *   **Student Name:** {student_name}
+    *   **Student's Goal:** Prospective PhD Applicant - Interest in [Specific Research Area of Professor]  // Example: "To be considered for a PhD position in your lab for the Fall 2025 cycle." OR "To explore a potential postdoctoral fellowship under your supervision."
+    *   **Student's CV/Resume:**
+        --- CV START ---
+        {cv_text}
+        --- CV END ---
+    *   **Professor's Information (Publications, lab website, bio, etc.):**
+        --- PROFESSOR INFO START ---
+        {prof_info}
+        --- PROFESSOR INFO END ---
+
+    **2. YOUR THOUGHT PROCESS (Follow these steps before writing):**
+    *   **Step A - Synthesize the Professor's Focus:** First, analyze the professor's information and identify their *current* research thrust. Don't just list keywords. What is the core question or problem they seem most excited about *right now*? Look for their most recent papers, projects, or grants.
+    *   **Step B - Find the "Golden Thread":** Next, meticulously scan the student's CV for the **single most compelling project, skill, or experience** that creates a direct "bridge" to the professor's current work identified in Step A. Don't just match keywords; find a conceptual or methodological link.
+    *   **Step C - Articulate the "Why":** Formulate a single, powerful sentence that explains *why* the student's experience (the Golden Thread) makes them uniquely prepared or intellectually curious about the professor's specific project. This is the heart of the email.
+
+    **3. DRAFTING THE EMAIL:**
+    Based on your thought process, draft the email.
+
+    **The Final Email Must:**
+    *   **Have a specific subject line:** "Inquiry from a Prospective PhD Student: {student_name}" or "Interest in [Specific Research Area] - {student_name}".
+    *   **Start with a personalized hook:** Immediately reference a *specific* recent paper, talk, or project. Mention the title of the paper if possible. Show you've done more than a cursory glance at their website.
+    *   **Create the "Bridge" (The 'Why'):** In 1-2 clear sentences, connect your "Golden Thread" from the student's CV to the professor's work. Example: "My work on [Student's Project from CV] gave me hands-on experience with [Specific Method or Concept], which seems directly applicable to the challenges you described in your recent paper on [Professor's Paper Topic]."
+    *   **State the Goal Clearly:** Explicitly state the purpose of the email, using the **Student's Goal**.
+    *   **Have a Clear Call to Action:** Politely ask *one* clear question. The best is often: "I was wondering if you are planning to accept new PhD students for the [Year] cycle?" This is a direct, low-pressure question that's easy to answer.
+    *   **Be Concise:** Aim for 250-300 words. Respect their time.
+    *   **Attach the CV:** Mention that the CV is attached for their convenience.
+
+    **Tone and Style Guide (Crucial for sounding human):**
+    *   **Genuine Enthusiasm, Not Flattery:** Sound like a curious peer, not a sycophant. Replace "Your groundbreaking work is inspiring" with "I was particularly intrigued by your approach to X in your 2023 paper on Y." Specificity is key.
+    *   **Confident but Humble:** Use "I" statements to own your experience. "I developed a model..." or "I gained experience in..."
+    *   **Avoid AI-Boilerplate:** Do NOT use phrases like "I am writing to express my profound interest," "I am confident that my skills would be a valuable asset," or "Thank you for your time and consideration." Instead, be more direct: "I'm writing to you today because...", "I believe my background in X would allow me to contribute...", and end with a simple, warm closing.
+    *   **Closing:** Use "Best regards," or "Sincerely," followed by "{student_name}". Do not add any other signature elements.
+
+    **OUTPUT ONLY THE DRAFTED EMAIL CONTENT (Subject + Body).**
+    """
+    return system_prompt
 
 def create_sop_latex_prompt(cv_text, prof_info, sop_template, student_name="the applicant", target_program="PhD Program"): # Renamed user_name to student_name
     prompt = f"""
@@ -143,69 +186,53 @@ def create_sop_latex_prompt(cv_text, prof_info, sop_template, student_name="the 
     return prompt
 
 def get_optimal_sending_time(prof_info):
-    # Dictionary of common US state names/abbreviations to timezone
-    us_tz_map = {
-        'eastern': 'America/New_York',
-        'et': 'America/New_York',
-        'est': 'America/New_York',
-        'ny': 'America/New_York',
-        'ma': 'America/New_York',
-        'central': 'America/Chicago',
-        'ct': 'America/Chicago',
-        'cst': 'America/Chicago',
-        'mountain': 'America/Denver',
-        'mt': 'America/Denver',
-        'mst': 'America/Denver',
-        'pacific': 'America/Los_Angeles',
-        'pt': 'America/Los_Angeles',
-        'pst': 'America/Los_Angeles',
-        'ca': 'America/Los_Angeles',
-    }
-    
-    # Try to extract location from professor's info
-    prof_info_lower = prof_info.lower()
+    my_local_tz = pytz.timezone("Asia/Dhaka")  # Bangladesh Time Zone
+    bd_current_time = datetime.now(my_local_tz)
+    day = bd_current_time.strftime("%A")  # Get current day of the week
     found_tz = None
     
-    # Look for state/timezone mentions in the text
-    for key, tz in us_tz_map.items():
-        if key in prof_info_lower:
-            found_tz = tz
-            break
-    
-    if not found_tz:
-        # Default to Eastern Time if no timezone found
-        found_tz = 'America/New_York'
-    
-    # Get current time in Bangladesh
-    bd_tz = pytz.timezone('Asia/Dhaka')
-    current_bd_time = datetime.now(bd_tz)
-    
-    # Convert to professor's timezone
-    prof_tz = pytz.timezone(found_tz)
-    current_prof_time = current_bd_time.astimezone(prof_tz)
-    
-    # Calculate optimal sending time (next working day between 9 AM and 11 AM)
-    optimal_time = current_prof_time.replace(hour=9, minute=30, second=0, microsecond=0)
-    
-    # If it's already past 11 AM in professor's timezone, move to next working day
-    if current_prof_time.hour >= 11:
-        optimal_time = optimal_time + timedelta(days=1)
-    
-    # Skip weekends
-    while optimal_time.weekday() in [5, 6]:  # 5 is Saturday, 6 is Sunday
-        optimal_time = optimal_time + timedelta(days=1)
-    
-    # Convert back to Bangladesh time for scheduling
-    optimal_time_bd = optimal_time.astimezone(bd_tz)
-    
-    return {
-        'bd_current_time': current_bd_time,
-        'prof_current_time': current_prof_time,
-        'optimal_time_bd': optimal_time_bd,
-        'optimal_time_prof': optimal_time,
-        'prof_timezone': found_tz,
-    }
+    system_prompt = f"""
+        You are an expert in time zone analysis and optimal email sending strategies.
+        Your task is to analyze the provided professor's information and determine the best time to send an email to them, considering their local time zone and typical working hours.
+        Here is the professor's information:
+        --- PROFESSOR INFO START ---
+        {prof_info}
+        --- PROFESSOR INFO END ---
 
+        --- MY LOCAL BANGLADESH TIME ZONE ---
+        The current time in Bangladesh is {bd_current_time} (Asia/Dhaka).
+        The current day is {day}.
+        Please analyze the professor's information to identify their local time zone and calculate the optimal time to send an email.
+
+        Instructions:
+        1. Identify the professor's local time zone based on their location or any clues in the provided information.
+        2. Calculate the current time in that time zone.
+        3. Determine the optimal time to send an email, considering typical working hours (e.g., 9 AM to 5 PM) and avoiding weekends.
+        4. Return all times in **12-hour format with AM/PM** (e.g., 9:00 AM, 7:30 PM).
+        5. Return the current time in both Bangladesh and the professor's local time, as well as the optimal sending time in both time zones.
+        6. Consider the weekday and time of day to ensure the email is sent at a time when the professor is likely to be checking their email.
+        7. Format the output as a dictionary with keys:
+        - 'bd_current_time': current time in Bangladesh (12-hour format with AM/PM),
+        - 'prof_current_time': current time in the professor's local time zone (12-hour format with AM/PM),
+        - 'optimal_time_bd': optimal sending time in Bangladesh (12-hour format with AM/PM),
+        - 'optimal_time_prof': optimal sending time in the professor's local time zone (12-hour format with AM/PM),
+        - 'prof_timezone': the professor's identified time zone.
+    """
+
+    if not prof_info:
+        return "Error: No professor information provided."
+
+    client = OpenAI(api_key=api_key)
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": system_prompt.format(prof_info=prof_info)},
+            {"role": "user", "content": ""}
+        ],
+        temperature=0.01
+    )
+    response = completion.choices[0].message.content.strip()
+    return response
 def get_professor_suggestions(cv_text, university_name, api_key, model, api_choice):
     prompt = f"""
     You are an expert academic advisor. Based on the student's CV and the specified university, suggest the top 5 professors 
@@ -370,14 +397,8 @@ with tabs[0]:
             
                 with col2:
                     st.info(f"""
-                    **Current Time Information:**
-                    - Your time (Bangladesh): {timing_info['bd_current_time'].strftime('%I:%M %p, %A, %B %d, %Y')}
-                    - Professor's local time: {timing_info['prof_current_time'].strftime('%I:%M %p, %A, %B %d, %Y')} ({timing_info['prof_timezone'].split('/')[-1].replace('_', ' ')})
-                    
-                    **Recommended Sending Time:**
-                    - Your time (Bangladesh): {timing_info['optimal_time_bd'].strftime('%I:%M %p, %A, %B %d, %Y')}
-                    - Professor's local time: {timing_info['optimal_time_prof'].strftime('%I:%M %p, %A, %B %d, %Y')}
-                    """)
+                            {timing_info}
+                            """)
 
     if st.button("🚀 Generate Email Draft", use_container_width=True):
         # Validations
