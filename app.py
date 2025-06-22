@@ -117,6 +117,7 @@ def create_email_prompt(cv_text, prof_info, student_name="the applicant"): # Ren
     Based on your thought process, draft the email.
 
     **The Final Email Must:**
+    *   **Introduction(CRUCIAL FIRT SENTENCE):** The email's first sentence **must be a concise self-introduction**. State the student's name and their current academic status (e.g., "a final-year undergraduate student in Computer Science at [University Name]").
     *   **Have a specific subject line:** "Inquiry from a Prospective PhD Student: {student_name}" or "Interest in [Specific Research Area] - {student_name}".
     *   **Start with a personalized hook:** Immediately reference a *specific* recent paper, talk, or project. Mention the title of the paper if possible. Show you've done more than a cursory glance at their website.
     *   **Create the "Bridge" (The 'Why'):** In 1-2 clear sentences, connect your "Golden Thread" from the student's CV to the professor's work. Example: "My work on [Student's Project from CV] gave me hands-on experience with [Specific Method or Concept], which seems directly applicable to the challenges you described in your recent paper on [Professor's Paper Topic]."
@@ -129,13 +130,63 @@ def create_email_prompt(cv_text, prof_info, student_name="the applicant"): # Ren
     *   **Genuine Enthusiasm, Not Flattery:** Sound like a curious peer, not a sycophant. Replace "Your groundbreaking work is inspiring" with "I was particularly intrigued by your approach to X in your 2023 paper on Y." Specificity is key.
     *   **Confident but Humble:** Use "I" statements to own your experience. "I developed a model..." or "I gained experience in..."
     *   **Avoid AI-Boilerplate:** Do NOT use phrases like "I am writing to express my profound interest," "I am confident that my skills would be a valuable asset," or "Thank you for your time and consideration." Instead, be more direct: "I'm writing to you today because...", "I believe my background in X would allow me to contribute...", and end with a simple, warm closing.
-    *   **Closing:** Use "Best regards," or "Sincerely," followed by "{student_name}". Do not add any other signature elements.
+    *   **Closing:** Use "Sincerely," followed by "{student_name}". Do not add any other signature elements.
 
     **OUTPUT ONLY THE DRAFTED EMAIL CONTENT (Subject + Body).**
     """
     return system_prompt
 
 def create_sop_latex_prompt(cv_text, prof_info, sop_template, student_name="the applicant", target_program="PhD Program"): # Renamed user_name to student_name
+    prompt = f"""
+    You are an expert academic advisor helping a student update their Statement of Purpose (SOP) LaTeX template
+    to be specifically tailored for a professor and their research.
+    The goal is to make the SOP compelling and highlight the student's fit with this specific professor.
+    The output MUST be in LaTeX format, and you should try to preserve the original template's structure as much as possible,
+    only modifying or adding content where it makes sense to personalize it for the professor.
+
+    The student's name is: {student_name}.
+
+    Student's CV/Resume:
+    --- CV START ---
+    {cv_text}
+    --- CV END ---
+
+    Professor's Information:
+    --- PROFESSOR INFO START ---
+    {prof_info}
+    --- PROFESSOR INFO END ---
+
+    Student's SOP LaTeX Template:
+    --- SOP TEMPLATE START ---
+    {sop_template}
+    --- SOP TEMPLATE END ---
+
+    Instructions:
+    1.  Carefully analyze the professor's recent work, research interests, and lab focus from their provided information.
+    2.  Identify sections in the SOP template that discuss research interests, future goals, or reasons for choosing a specific program/university. These are prime candidates for customization.
+    3.  Look for placeholders in the template (e.g., `%%STUDENT_NAME%%`, `%%PROFESSOR_NAME%%`, `%%UNIVERSITY_NAME%%`, `%%SPECIFIC_RESEARCH_INTEREST_HERE%%`, `%%MENTION_PROFESSOR_WORK_ALIGNMENT%%`). If they exist, fill them appropriately.
+        *   Specifically, replace `%%STUDENT_NAME%%` (or common patterns like `\\author{{Your Name}}`) with "{student_name}".
+    4.  If no explicit placeholders exist, identify the most relevant paragraphs to modify.
+    5.  Integrate how the student's skills, experiences (from CV), and research interests align DIRECTLY with THE SPECIFIC PROFESSOR'S work. Be concrete. Mention specific projects or papers of the professor if relevant and appropriate to weave in naturally.
+    6.  Update any mentions of the university or program to be specific, if the template is generic.
+    7.  The tone should remain academic, enthusiastic, and professional.
+    8.  **Output the complete, updated SOP in LaTeX format.** Ensure all LaTeX syntax from the original template is preserved unless a modification is strictly necessary for content. If you are unsure about complex LaTeX, try to keep changes to the textual content within existing LaTeX commands/environments.
+
+    For example, if the template has:
+    `\\author{{%%STUDENT_NAME%%}}`
+    Update it to:
+    `\\author{{{student_name}}}`
+
+    And if the template has a section like:
+    `My primary research interest lies in [General Area]. I am particularly drawn to [University Name] because of its strong program in this field.`
+    You might update it to:
+    `My primary research interest lies in [Specific Area from Prof's work, e.g., Reinforcement Learning for Robotics]. I am particularly drawn to Professor [Professor's Last Name]'s work on [Specific Project/Paper of Professor] at [University Name], as it directly aligns with my project on [Student's relevant project from CV].`
+
+    Begin the output directly with the LaTeX code (e.g., `\\documentclass{{article}}`). Do not add any preamble like "Here is the updated SOP:".
+    """
+    return prompt
+
+def create_sop_latex_prompt(cv_text, prof_info, sop_template, student_name="Koshik Debanath", target_program="PhD Program"): # Renamed user_name to student_name
     prompt = f"""
     You are an expert academic advisor helping a student update their Statement of Purpose (SOP) LaTeX template
     to be specifically tailored for a professor and their research.
