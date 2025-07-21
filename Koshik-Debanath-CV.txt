@@ -1,18 +1,18 @@
 Koshik Debanath
-+8801855675763 |
-koshik.debanath@gmail.com |
-LinkedIn |  GitHub |
-Google Scholar |  Portfolio
+Æ +8801855675763 | R koshik.debanath@gmail.com | ° LinkedIn |  GitHub |  Google Scholar |  Portfolio
+Research Objective
+A highly motivated researcher with extensive experience in Natural Language Processing, Generative AI, and Deep
+Learning, evidenced by multiple peer-reviewed publications. Seeking to pursue a PhD to develop novel multi-modal
+models and explore their applications in complex reasoning and misinformation detection.
 Education
-Rajshahi University of Engineering & Technology
-Rajshahi, Bangladesh
-B.Sc. in Computer Science and Engineering; CGPA: 3.27/4.00
-Jan 2018 – Sep 2023
+Rajshahi University of Engineering & Technology Rajshahi, Bangladesh
+B.Sc. in Computer Science and Engineering; CGPA: 3.27/4.00 Jan 2018 – Sep 2023
 Skills
-Programming: C/C++, Python, Java, MATLAB, JavaScript
-Tools & Platforms: Git, Docker, CI/CD, MLOps, MySQL, MongoDB, SQLite, Django, Flask, FastAPI
-AI/ML: PyTorch, TensorFlow, scikit-learn, OpenCV, NLP (LLMs, Fine Tuning, Prompt Engineering), Computer
-Vision, Time Series Analysis, Generative AI, Data Mining
+Languages: Python (Expert), C/C++, Java, JavaScript, SQL, MATLAB
+AI/ML Frameworks: PyTorch, TensorFlow, Keras, Scikit-learn, LangChain, Transformers, OpenCV
+AI/ML Expertise: Generative AI (LLMs, RAG, Fine-tuning), NLP, Computer Vision, Deep Learning, Time Series
+Analysis, Prompt Engineering, Explainable AI (XAI), Data Mining
+Tools & Platforms: Git, Docker, FastAPI, Flask, Django, CI/CD, MLOps, Pinecone, MongoDB, MySQL, SQLite
 Publications
 • K. D. Nath, A. F. M. M. Rahman and M. A. Hossain, “An Attention-Based Deep Learning Approach to Knee
 Injury Classification from MRI Images,” 2023 26th International Conference on Computer and Information
@@ -30,40 +30,41 @@ in 2nd International Conference on Next-Generation Computing, IoT and Machine Le
 • S. Aich, K. Debanath, and A. Y. Srizon, “Distinguishing Human-Written and AI-Generated Text: A
 Comprehensive Study Using Explainable Artificial Intelligence in Text Classification,” Accepted, To appear in 2nd
 International Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025).
+• K. Debanath, “Physics-Informed Neural Networks for Real-Time Anomaly Detection in Power System Dynamics,”
+Under Review, Submitted to 3rd International Conference on Big Data, IoT and Machine Learning (BIM 2025).
 Experience
-Manaknightdigital Inc.
-Toronto, Ontario, Canada (Remote)
-Data Scientist
+Manaknightdigital Inc. Toronto, ON, Canada (Remote)
+Data Scientist Mar 2023 – Apr 2025
 • Chatbot Development:
-Mar 2023 – Apr 2025
-• ∗ Collected and processed product information using Excel, pandas, and openpyxl.
+∗ Collected and processed product information using Excel, pandas, and openpyxl.
 ∗ Integrated GPT-4 to respond to user queries and manage token size limitations.
 ∗ Utilized libraries like nltk, sklearn, and Flask for deploying the chatbot.
-Fraud Detection System:
-• ∗ Performed EDA and feature extraction on transaction datasets.
+• Fraud Detection System:
+∗ Performed EDA and feature extraction on transaction datasets.
 ∗ Developed and optimized ML models including Xgboost, SVC, and Logistic Regression.
 ∗ Achieved 90% accuracy in detecting fraudulent transactions and deployed the system using Flask.
-Data-driven ChatBot for Financial Queries:
-• ∗ Implemented RAG and Pinecone, enhancing data retrieval speed by 40%, enabling faster decision-making for
+• Data-driven ChatBot for Financial Queries:
+∗ Implemented RAG and Pinecone, enhancing data retrieval speed by 40%, enabling faster decision-making for
 lenders.
-∗ Improved data retrieval accuracy by 25%
+∗ Improved data retrieval accuracy by 25% using Cohere reranking, resulting in more precise financial advice.
 ∗ Applied Beautiful Soup and PyPDF2 for data scraping and processing.
-Sports Data Analysis ChatBot:
-∗ Scraped and analyzed football data to predict match outcomes.• ∗ Integrated RAG and Pinecone for efficient data querying and vector database management.
+• Sports Data Analysis ChatBot:
+∗ Scraped and analyzed football data to predict match outcomes.
+∗ Integrated RAG and Pinecone for efficient data querying and vector database management.
 ∗ Employed Beautiful Soup and PyPDF2 for data collection, analyzing 2 million football data points to achieve a
 90% prediction accuracy, supporting strategic betting decisions.
-Custom Image Generation System:
-• ∗ Developed an image generation platform using Stable Diffusion.
+• Custom Image Generation System:
+∗ Developed an image generation platform using Stable Diffusion.
 ∗ Fine-tuned custom models to generate images based on user-defined presets.
 ∗ Utilized PyTorch and transformers for model training and deployment and finally used Docker for
 containerization.
-AI-driven Data Matching System:
-• ∗ Organizational data was segmented using models such as Llama-2-7B and then fine-tuned to extract sections
+• AI-driven Data Matching System:
+∗ Organizational data was segmented using models such as Llama-2-7B and then fine-tuned to extract sections
 and subsections.
 ∗ Applied cosine similarity for matching data to specific tenders.
 ∗ Integrated GPT-4 for generating rationale from corresponding data.
 ∗ Matched organizational data against specific tenders, increasing successful tender submissions by 70%.
-AI-Powered Collectible Authentication & Appraisal Platform:
+• AI-Powered Collectible Authentication & Appraisal Platform:
 ∗ Trained deep learning models (PyTorch/TensorFlow, e.g., InceptionV3, ResNet50, CLIP) for image
 classification (authenticity) and similarity search.
 ∗ Engineered an efficient CLIP+FAISS image similarity system for large-scale appraisal lookups.
@@ -74,70 +75,75 @@ similarity.
 ingestion from APIs.
 ∗ Developed a Streamlit web application for user image uploads and displaying similarity/appraisal results via
 API calls.
-Universal Machine Inc.
-Sunnyvale, California, United States (Remote/Hybrid)
-Software Engineer - I
+Universal Machine Inc. Sunnyvale, CA, USA (Remote)
+Software Engineer I Apr 2025 – Present
 • YouTube Live Stream Bot:
-Apr 2025 – Present
 ∗ Developed Chrome Extension automating YouTube Live chat using JavaScript, Chrome APIs, and async
 requests.
 ∗ Integrated YouTube & OpenAI APIs for real-time chat fetching/posting and AI response generation.
 ∗ Engineered AI features managing conversational history (chrome.storage) and prompt engineering for
 context/recall.
 ∗ Implemented secure Google OAuth (chrome.identity) and robust error handling for external APIs.
-Competitions
-Hackathon Champion at Machine Hack: Global Ranking: 539 Out Of 8861
-Rental Bikes Volume Prediction: Rank: 3rd
-News Category Prediction: Rank: 7th
-Data Science Student Championship: Secured 7th position among 1029 participants from engineering colleges and
-universities across India in jointly hosted by MachineHack Generative AI and Praxis Tech School
-LLM Hackathon: Decoding Discourse - AI vs Human: Rank: 5th Out of 227.
-Predicting House Prices in Bengaluru: 24th Rank Out Of 2885 with Accuracy of 87%.
-Subscriber Prediction Talent Search Hackathon: Rank: 26th Out Of 5045.
-Analytics Olympiad 2022: Rank: 82 Out Of 1029.
-Data Science Student Championship - South Zone: Rank: 73rd Out of 554.
-Decoding Discourse - AI vs Human: Rank: 5th Out of 293.Projects
-Bangladesh Stock Price Forecast | App
-• Goal: Forecasting Stock Price of Bangladesh by using LSTM (Long Short-Term Memory) networks
-• Library: pandas, numpy, matplotlib, bdshare, keras, streamlit, and plotly
+Projects
+AI Investment Committee for Binance | GitHub | Streamlit App
+• Designed a multi-agent AI system with specialized agents to provide cryptocurrency investment recommendations.
+• Tech Stack: Python, OpenAI/Gemini API, Binance API, Streamlit, Pydantic.
+Stock Price Forecasting | BD App | Global App
+• Engineered LSTM models to forecast stock prices for Bangladeshi and global markets, deployed via Streamlit.
+• Tech Stack: Python, TensorFlow, Keras, LSTM, Pandas, Plotly, Streamlit, ‘bdshare‘.
+DataSciencePilot (RAG System) | GitHub
+• Built a chat-based interface to query custom PDFs using Pinecone for vector search and LLaMA-2 for generation.
+• Tech Stack: LangChain, Transformers, LLaMA-2, Pinecone, Python.
+CVAnalyzerPro | Streamlit App
+• Developed an AI tool to automatically score candidate CVs against company job requirements using LLMs.
+• Tech Stack: OpenAI API, Gemini API, Streamlit.
 UberRidePrediction | PyPi | WebApp
-• Goal: UberRidePrediction is a Python module designed to predict Uber ride prices based on factors like location
-coordinates, number of passengers, and ride time using machine learning algorithms(Xgboost).
-• Library: scikit-learn, CI/CD Pipeline, FastAPI
-PineconeUtils | PyPi
-• Goal: PineconeUtils is a Python module designed to handle and process data for embedding and indexing using
-Pinecone, Cohere, and OpenAI services for applications involving text embedding and retrieval augmented
-systems(RAG) Library: PineconePDFExtractor, openai,cohere,pinecone
+• Packaged an XGBoost model as a Python module to predict Uber fares and deployed it with FastAPI.
+• Tech Stack: Scikit-learn, XGBoost, CI/CD, FastAPI, Render.
+Pinecone Integration Suite | PyPi
+• Authored and published two Python libraries (PineconeUtils, PineconePDFExtractor) to simplify data handling for
+RAG systems.
+• Tech Stack: Pinecone, Cohere, OpenAI, PyPDF2.
 Decoding AI vs Human | WebApp
-• Goal: Decoding AI vs Human is an interactive web application that allows users to put any text and see if a human
-or an AI wrote it. This application is trained on the Machine Hack dataset. Library/Technology: scikit-learn, AWS
-PineconePDFExtractor | PyPi
-• Goal: PineconePDFExtractor is a Python library for extracting text from PDF files for pinecone. Library: PyPdf2
-DataSciencePilot | GitHub
-• Goal: It is a chat-based interface designed to interact with custom PDF files. It leverages the power of Pinecone for
-efficient vector database management and LLaMA-2 for advanced query response capabilities Library: Pinecone,
-Langchain, Transformers
-CVAnalyzerPro | StreamlitApp
-• Goal: matches participant’s CVs with the company’s requirements and gives scoring Library: openai, Gemini,
-Streamlit
+• Developed a web app that allows users to determine if text was written by a human or an AI, trained on
+MachineHack data.
+• Tech Stack: Scikit-learn, AWS, Render.
 CaptionCraft | StreamlitApp
-• Goal: generate caption using Google Gemini API Library: Gemini, Streamlit
-PredictStock | StreamlitApp
-• Goal: to predict the stock of any company like Google, Microsoft, Apple Solution: used LSTM to train the model
-Library: Tensorflow, Streamlit
-Diabetes Prediction | GitHub
-• Goal: predict whether any patient has diabetes or not Solution: used Artificial Neural Network(ANN) to train the
-model and predict the disease Library: PyTorch, Flask, Gunicorn
-Movie Recommendation | WebApp
-• Goal: recommend the movie based on the movie entered by user Solution: Used KNN to find the nearest 5 movies
-using cosine similarity Library: pandas, numpy,sklearn, Flask, scipy
+• Created a web application to generate image captions using the Google Gemini Pro Vision API.
+• Tech Stack: Gemini, Streamlit, Python.
 Market Price Prediction | GitHub
-• Goal: to predict the price of the product using ARIMA, SARIMAX,LSTM, FbProphet, GRU, Xgboost
-Potato Disease Classification Using CNN | GitHub
-• Goal: To classify disease in Potato Solution: the dataset is taken from Kaggle which contains 1506 images with 3
-classes Result: Overall accuracy is 100% Library: Tensorflow
-Open Source Contribution
-• Contributed on openllmetry: Open-source observability for your LLM application, based on OpenTelemetry
-Contribution
-• Contributed on Pinecone Canopy: Retrieval Augmented Generation (RAG) framework and context engine powered
-by Pinecone Contribution
+• Implemented and compared multiple time-series models to predict product prices.
+• Models: ARIMA, SARIMAX, LSTM, GRU, XGBoost, Prophet.
+Movie Recommendation | WebApp
+• Implemented a KNN model using cosine similarity to recommend movies based on user input.
+• Tech Stack: Scikit-learn, Pandas, Flask, Scipy.
+Potato Disease Classification | GitHub
+• Built a CNN model achieving near-100% accuracy in classifying potato diseases from images.
+• Tech Stack: TensorFlow, Keras, CNN.
+Diabetes Prediction | GitHub
+• Constructed an Artificial Neural Network with PyTorch to predict patient diabetes status.
+• Tech Stack: PyTorch, Flask, Gunicorn, Pandas.
+Competitions & Achievements
+Hackathon Champion at Machine Hack: Global Ranking 539 out of 8,861.
+Data Science Student Championship: Secured 7th position among 1,029 participants.
+LLM Hackathon (Decoding Discourse - AI vs Human): Ranked 5th out of 227 participants.
+Rental Bikes Volume Prediction Hackathon: Ranked 3rd.
+News Category Prediction Hackathon: Ranked 7th.
+Predicting House Prices in Bengaluru: Ranked 24th out of 2,885 participants with 87% accuracy.
+Subscriber Prediction Talent Search Hackathon: Ranked 26th out of 5,045 participants.
+Analytics Olympiad 2022: Ranked 82nd out of 1,029 participants.
+Data Science Student Championship - South Zone: Ranked 73rd out of 554 participants.
+Decoding Discourse - AI vs Human: Ranked 5th out of 293 participants.
+Open Source Contributions
+• Contributed to OpenLLMetry, an open-source observability framework for LLM applications. (PR #1836)
+• Contributed to Pinecone Canopy, a Retrieval-Augmented Generation (RAG) framework. (Commit)
+Relevant Coursework
+Major coursework: Linear Algebra, Data Structures and Algorithms, Object Oriented Programming, Discrete
+Mathematics, Database Management, Applied Statistics & Queuing Theory, Digital Image Processing, Neural Network
+and Fuzzy System, Artificial Intelligence, Data Mining
+Certifications & Professional Development
+Understanding and Applying Text Embeddings – DeepLearning.AI [Nov 2024]
+A comprehensive short course on the end-to-end development of applications using text embeddings. Key topics included:
+– Fundamentals of creating, understanding, and visualizing embedding spaces.
+– Leveraging embeddings for practical applications like semantic search and retrieval.
+– Building a complete Q&A system (Retrieval-Augmented Generation) using Google’s Vertex AI.
