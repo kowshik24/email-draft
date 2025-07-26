@@ -1,12 +1,16 @@
 Koshik Debanath
-Æ +8801855675763 | R koshik.debanath@gmail.com | ° LinkedIn |  GitHub |  Google Scholar |  Portfolio
+
+Æ +8801855675763 | R koshik.debanath@gmail.com | ° LinkedIn |  GitHub |  Google Scholar |  Portfolio
 Research Objective
 A highly motivated researcher with extensive experience in Natural Language Processing, Generative AI, and Deep
 Learning, evidenced by multiple peer-reviewed publications. Seeking to pursue a PhD to develop novel multi-modal
 models and explore their applications in complex reasoning and misinformation detection.
 Education
 Rajshahi University of Engineering & Technology Rajshahi, Bangladesh
-B.Sc. in Computer Science and Engineering; CGPA: 3.27/4.00 Jan 2018 – Sep 2023
+B.Sc. in Computer Science and Engineering CGPA: 3.27 / 4.00 Jan 2018 – Sep 2023
+• Relevant Coursework: Linear Algebra, Data Structures and Algorithms, Object Oriented
+Programming, Discrete Mathematics, Database Management, Applied Statistics & Queuing Theory,
+Digital Image Processing, Neural Network and Fuzzy System, Artificial Intelligence, Data Mining
 Skills
 Languages: Python (Expert), C/C++, Java, JavaScript, SQL, MATLAB
 AI/ML Frameworks: PyTorch, TensorFlow, Keras, Scikit-learn, LangChain, Transformers, OpenCV
@@ -14,6 +18,11 @@ AI/ML Expertise: Generative AI (LLMs, RAG, Fine-tuning), NLP, Computer Vision, D
 Analysis, Prompt Engineering, Explainable AI (XAI), Data Mining
 Tools & Platforms: Git, Docker, FastAPI, Flask, Django, CI/CD, MLOps, Pinecone, MongoDB, MySQL, SQLite
 Publications
+Journal Articles
+• Debanath, Koshik and Aich, Sagor and Srizon, Azmain Yakin, “Bayesian Physics-Informed Neural Networks for
+Parameter Inference and Uncertainty Quantification in Reaction-Diffusion Models of Wound Healing,” Under
+review Mathematical Biosciences (July 2025). Preprint available at SSRN or DOI.
+Conferences
 • K. D. Nath, A. F. M. M. Rahman and M. A. Hossain, “An Attention-Based Deep Learning Approach to Knee
 Injury Classification from MRI Images,” 2023 26th International Conference on Computer and Information
 Technology (ICCIT), Cox’s Bazar, Bangladesh, 2023, pp. 1-6, doi: 10.1109/ICCIT60459.2023.10441340.
@@ -32,6 +41,7 @@ Comprehensive Study Using Explainable Artificial Intelligence in Text Classifica
 International Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025).
 • K. Debanath, “Physics-Informed Neural Networks for Real-Time Anomaly Detection in Power System Dynamics,”
 Under Review, Submitted to 3rd International Conference on Big Data, IoT and Machine Learning (BIM 2025).
+
 Experience
 Manaknightdigital Inc. Toronto, ON, Canada (Remote)
 Data Scientist Mar 2023 – Apr 2025
@@ -51,8 +61,8 @@ lenders.
 • Sports Data Analysis ChatBot:
 ∗ Scraped and analyzed football data to predict match outcomes.
 ∗ Integrated RAG and Pinecone for efficient data querying and vector database management.
-∗ Employed Beautiful Soup and PyPDF2 for data collection, analyzing 2 million football data points to achieve a
-90% prediction accuracy, supporting strategic betting decisions.
+∗ Employed Beautiful Soup and PyPDF2 for data collection, analyzing 2 million football data points to achieve
+a 90% prediction accuracy, supporting strategic betting decisions.
 • Custom Image Generation System:
 ∗ Developed an image generation platform using Stable Diffusion.
 ∗ Fine-tuned custom models to generate images based on user-defined presets.
@@ -73,8 +83,10 @@ classification (authenticity) and similarity search.
 similarity.
 ∗ Implemented asynchronous data pipelines (aiohttp, asyncio, pandas) for large-scale image and metadata
 ingestion from APIs.
+
 ∗ Developed a Streamlit web application for user image uploads and displaying similarity/appraisal results via
 API calls.
+
 Universal Machine Inc. Sunnyvale, CA, USA (Remote)
 Software Engineer I Apr 2025 – Present
 • YouTube Live Stream Bot:
@@ -84,6 +96,7 @@ requests.
 ∗ Engineered AI features managing conversational history (chrome.storage) and prompt engineering for
 context/recall.
 ∗ Implemented secure Google OAuth (chrome.identity) and robust error handling for external APIs.
+
 Projects
 AI Investment Committee for Binance | GitHub | Streamlit App
 • Designed a multi-agent AI system with specialized agents to provide cryptocurrency investment recommendations.
@@ -101,8 +114,8 @@ UberRidePrediction | PyPi | WebApp
 • Packaged an XGBoost model as a Python module to predict Uber fares and deployed it with FastAPI.
 • Tech Stack: Scikit-learn, XGBoost, CI/CD, FastAPI, Render.
 Pinecone Integration Suite | PyPi
-• Authored and published two Python libraries (PineconeUtils, PineconePDFExtractor) to simplify data handling for
-RAG systems.
+• Authored and published two Python libraries (PineconeUtils, PineconePDFExtractor) to simplify data handling
+for RAG systems.
 • Tech Stack: Pinecone, Cohere, OpenAI, PyPDF2.
 Decoding AI vs Human | WebApp
 • Developed a web app that allows users to determine if text was written by a human or an AI, trained on
@@ -113,6 +126,7 @@ CaptionCraft | StreamlitApp
 • Tech Stack: Gemini, Streamlit, Python.
 Market Price Prediction | GitHub
 • Implemented and compared multiple time-series models to predict product prices.
+
 • Models: ARIMA, SARIMAX, LSTM, GRU, XGBoost, Prophet.
 Movie Recommendation | WebApp
 • Implemented a KNN model using cosine similarity to recommend movies based on user input.
