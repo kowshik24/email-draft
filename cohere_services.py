@@ -6,7 +6,7 @@ client = ClientV2(api_key=os.getenv("COHERE_API_KEY"))
 
 
 cv_text = ""
-with open("/home/kowshik/personal_work/email-draft/SOP-Koshik-Debanath.txt", 'r') as file:
+with open("SOP-Koshik-Debanath.txt", 'r') as file:
     cv_text = file.read()
 
 system_prompt = """
