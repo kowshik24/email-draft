@@ -1231,7 +1231,7 @@ Professor %%PROFESSOR_NAME%%'s work on %%MENTION_PROFESSOR_WORK_ALIGNMENT%% at %
     )
 
 # --- Main Page ---
-tabs = st.tabs(["✉️ Email Draft", "👨‍🏫 Professor Suggestions", "🎓 PhD Position Finder", "🤖 Cohere Professor Finder"])
+tabs = st.tabs(["✉️ Email Draft", "👨‍🏫 Professor Suggestions", "🎓 PhD Position Finder", "🤖 Cohere Professor Finder", "🌐 OpenAI Web Search"])
 
 with tabs[0]:
     st.header("Professor's Information")
@@ -1730,6 +1730,249 @@ with tabs[3]:
                 st.warning("Please enter a university name.")
     else:
         st.error("Cohere service is not available. Please check that cohere_services.py is properly configured.")
+
+with tabs[4]:
+    st.header("🌐 OpenAI Web Search Professor Finder")
+    st.markdown("""
+    This tool uses OpenAI's web search functionality to find professors at universities using real-time web data.
+    
+    **Features:**
+    - Uses OpenAI's web search models (gpt-4o-search-preview, gpt-4o-mini-search-preview)
+    - Searches the web for up-to-date faculty information
+    - Returns detailed professor information with citations
+    - Configurable search parameters for better results
+    
+    **How it works:**
+    1. Enter a university name
+    2. Configure web search parameters (optional)
+    3. The AI searches the web for current faculty information
+    4. Returns professors matching your CV profile with web citations
+    """)
+    
+    # Web search university input
+    web_search_university = st.text_input("Enter University Name", placeholder="e.g., Iowa State University", key="web_search_university")
+    
+    # Web search parameters configuration
+    st.markdown("### ⚙️ Web Search Parameters")
+    with st.expander("Configure Web Search Settings", expanded=False):
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # Search context size
+            search_context_size = st.selectbox(
+                "Search Context Size",
+                ["medium", "high", "low"],
+                index=0,  # Default to medium
+                help="High: Most comprehensive context, slower response. Medium: Balanced context and latency. Low: Least context, fastest response."
+            )
+            
+            # User location settings
+            st.markdown("#### 📍 User Location (Optional)")
+            use_location = st.checkbox("Use location-based search", value=False)
+            
+            if use_location:
+                country = st.text_input("Country Code (2-letter ISO)", placeholder="US", help="e.g., US, GB, CA")
+                city = st.text_input("City", placeholder="New York")
+                region = st.text_input("Region/State", placeholder="New York")
+                timezone = st.text_input("Timezone (IANA)", placeholder="America/New_York", help="e.g., America/New_York, Europe/London")
+        
+        with col2:
+            # Model selection for web search
+            web_search_models = ["gpt-4o-search-preview", "gpt-4o-mini-search-preview"]
+            selected_web_search_model = st.selectbox(
+                "Web Search Model",
+                web_search_models,
+                index=0,  # Default to gpt-4o-search-preview
+                help="Select the OpenAI model with web search capabilities"
+            )
+            
+            # Temperature setting
+            temperature = st.slider(
+                "Temperature",
+                min_value=0.0,
+                max_value=1.0,
+                value=0.1,
+                step=0.1,
+                help="Controls randomness in the response (0.0 = deterministic, 1.0 = very random)"
+            )
+    
+    if cv_text and web_search_university:
+        if st.button("🔍 Find Professors with Web Search", use_container_width=True):
+            if not api_key:
+                st.error("Please enter your OpenAI API key in the sidebar.")
+            elif api_choice != "OpenAI":
+                st.error("This feature requires OpenAI API. Please select OpenAI in the sidebar.")
+            else:
+                with st.spinner("Searching for professors using OpenAI web search... This may take a moment."):
+                    try:
+                        # Prepare web search options
+                        web_search_options = {
+                            "search_context_size": search_context_size
+                        }
+                        
+                        # Add user location if specified
+                        if use_location and (country or city or region or timezone):
+                            user_location = {"type": "approximate", "approximate": {}}
+                            if country:
+                                user_location["approximate"]["country"] = country
+                            if city:
+                                user_location["approximate"]["city"] = city
+                            if region:
+                                user_location["approximate"]["region"] = region
+                            if timezone:
+                                user_location["approximate"]["timezone"] = timezone
+                            web_search_options["user_location"] = user_location
+                        
+                        # Create the system prompt based on the test file
+                        system_prompt = f"""You are an expert academic researcher. Find professors, associate professors, and assistant professors who would be good matches for potential PhD supervision.
+    
+    Student's Research Interests:
+    --- Research Interests START ---
+    Machine Learning, Deep Learning, Generative AI, Large Language Models, Computer Vision, Explainable AI, AI
+    --- Research Interests END ---
+
+    Student's Research Objective:
+    A highly motivated researcher with extensive experience in Natural Language Processing, Generative AI, and Deep
+    Learning, evidenced by multiple peer-reviewed publications. Seeking to pursue a PhD to develop novel multi-modal
+    models and explore their applications in complex reasoning and misinformation detection.
+
+    Student's Education:
+    --- Education START ---
+    Rajshahi University of Engineering & Technology, Rajshahi, Bangladesh(B.Sc. in Computer Science and Engineering CGPA: 3.27 / 4.00)
+    Relevant Coursework: Linear Algebra, Data Structures and Algorithms, Object Oriented
+    Programming, Discrete Mathematics, Database Management, Applied Statistics & Queuing Theory,
+    Digital Image Processing, Neural Network and Fuzzy System, Artificial Intelligence, Data Mining
+    --- Education END ---
+
+    Student's Skills:
+    --- Skills START ---
+    Languages: Python (Expert), C/C++, Java, JavaScript, SQL, MATLAB
+    AI/ML Frameworks: PyTorch, TensorFlow, Keras, Scikit-learn, LangChain, Transformers, OpenCV
+    AI/ML Expertise: Generative AI (LLMs, RAG, Fine-tuning), NLP, Computer Vision, Deep Learning, Time Series
+    Analysis, Prompt Engineering, Explainable AI (XAI), Data Mining
+    Tools & Platforms: Git, Docker, FastAPI, Flask, Django, CI/CD, MLOps, Pinecone, MongoDB, MySQL, SQLite
+    --- Skills END ---
+    
+    Student's Publications:
+    --- Publications START ---
+    Journal Articles:
+    • Debanath, Koshik and Aich, Sagor and Srizon, Azmain Yakin, "Bayesian Physics-Informed Neural Networks for
+    Parameter Inference and Uncertainty Quantification in Reaction-Diffusion Models of Wound Healing," Under
+    review Mathematical Biosciences (July 2025). Preprint available at SSRN or DOI.
+
+    Conferences:
+    • K. D. Nath, A. F. M. M. Rahman and M. A. Hossain, "An Attention-Based Deep Learning Approach to Knee
+    Injury Classification from MRI Images," 2023 26th International Conference on Computer and Information
+    Technology (ICCIT), Cox's Bazar, Bangladesh, 2023, pp. 1-6, doi: 10.1109/ICCIT60459.2023.10441340.
+    • K. Debanath, S. Aich and A. Y. Srizon, "Advancing Low-Resource NLP: Contextual Question Answering for
+    Bengali Language Using Llama," 2025 International Conference on Electrical, Computer and Communication
+    Engineering (ECCE), Chittagong, Bangladesh, 2025, pp. 1-6, doi: 10.1109/ECCE64574.2025.11013841.
+    • S. Aich, K. Debanath and A. Y. Srizon, "Distinguishing Between Formal and Colloquial: A Multilingual BERT
+    Approach to Bengali Language Classification," 2025 International Conference on Electrical, Computer and
+    Communication Engineering (ECCE), Chittagong, Bangladesh, 2025, pp. 1-6, doi:
+    10.1109/ECCE64574.2025.11013999
+    • K. Debanath, S. Aich and A. Y. Srizon, "Analyzing Bot Activity and Political Discourse in the 2024 U.S.
+    Presidential Election: A Machine Learning Approach to Misinformation and Manipulation," Accepted, To appear
+    in 2nd International Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025).
+    • S. Aich, K. Debanath, and A. Y. Srizon, "Distinguishing Human-Written and AI-Generated Text: A
+    Comprehensive Study Using Explainable Artificial Intelligence in Text Classification," Accepted, To appear in 2nd
+    International Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025).
+    • K. Debanath, "Physics-Informed Neural Networks for Real-Time Anomaly Detection in Power System Dynamics,"
+    Under Review, Submitted to 3rd International Conference on Big Data, IoT and Machine Learning (BIM 2025).
+    --- Publications END ---
+    
+    
+    
+    University: {web_search_university}
+    
+    Please analyze the student's research interests, skills, and find professors 
+    from {web_search_university} whose research aligns well with the student's profile.
+    
+    Find 5-8 professors who are the best matches. For each professor, provide:
+    1. Full name and academic title (Professor, Associate Professor, or Assistant Professor)
+    2. Department
+    3. Research areas (2-4 key areas)
+    4. Email address (if available)
+    5. Personal website URL (if available)
+    6. Google Scholar profile URL (if available)
+    7. LinkedIn profile URL (if available)
+    
+    IMPORTANT: 
+    - Use the exact field name "name" (not "full_name") for professor names
+    - Try to find actual website URLs, Google Scholar profiles, and LinkedIn profiles for each professor
+    - If you can't find specific URLs, you can leave them as null, but make an effort to include real profile links
+    - Provide your response in a structured format that's easy to read
+    - Include web citations where appropriate to show your sources
+"""
+                        
+                        # Create the user query
+                        query = f"Find professors from {web_search_university} who are good matches for the student's profile."
+                        
+                        # Make the API call with web search
+                        client = OpenAI(api_key=api_key)
+                        completion = client.chat.completions.create(
+                            model=selected_web_search_model,
+                            web_search_options=web_search_options,
+                            messages=[
+                                {
+                                    "role": "system",
+                                    "content": system_prompt,
+                                },
+                                {
+                                    "role": "user",
+                                    "content": query,
+                                }
+                            ]
+                            # temperature=temperature
+                        )
+                        
+                        # Get the response
+                        response_content = completion.choices[0].message.content
+                        
+                        # Display the results
+                        st.success(f"Found professors at {web_search_university} using web search!")
+                        
+                        # Display the main response
+                        st.subheader("👨‍🏫 Professor Results")
+                        st.markdown(response_content)
+                        
+                        # Display citations if available
+                        if hasattr(completion.choices[0].message, 'annotations') and completion.choices[0].message.annotations:
+                            st.subheader("📚 Web Citations")
+                            for annotation in completion.choices[0].message.annotations:
+                                if annotation.type == "url_citation":
+                                    citation = annotation.url_citation
+                                    st.markdown(f"**Source:** [{citation.title}]({citation.url})")
+                                    st.markdown(f"**Cited in response:** Characters {citation.start_index}-{citation.end_index}")
+                                    st.markdown("---")
+                        
+                        # Download results
+                        st.subheader("📥 Download Results")
+                        results_text = f"University: {web_search_university}\n\n{response_content}"
+                        st.download_button(
+                            "Download Results (TXT)",
+                            results_text,
+                            file_name=f"web_search_professors_{web_search_university.replace(' ', '_')}.txt",
+                            mime="text/plain"
+                        )
+                        
+                        # Display raw response for debugging (collapsible)
+                        with st.expander("🔧 Raw API Response"):
+                            st.json({
+                                "model": selected_web_search_model,
+                                "web_search_options": web_search_options,
+                                "response": response_content,
+                                "annotations": completion.choices[0].message.annotations if hasattr(completion.choices[0].message, 'annotations') else []
+                            })
+                        
+                    except Exception as e:
+                        st.error(f"Error calling OpenAI web search: {e}")
+                        st.info("Make sure you're using a web search compatible model and have sufficient API credits.")
+    else:
+        if not cv_text:
+            st.warning("Please paste your CV in the sidebar first.")
+        if not web_search_university:
+            st.warning("Please enter a university name.")
 
 # --- Footer ---
 st.sidebar.markdown("---")
