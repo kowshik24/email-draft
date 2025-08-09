@@ -470,81 +470,87 @@ def search_professors_by_university_enhanced(university_name, cv_text, api_key, 
         return f"Error: {e}"
 
 # --- Prompt Engineering Functions ---
+
 def create_email_prompt(cv_text, prof_info, student_name="the applicant"): # Renamed user_name to student_name
     prompt = f"""
-    You are an expert academic advisor helping a student draft an email to a professor.
-    The email should sound human-written, personalized, concise, and highly professional.
-    It should NOT sound like it was written by an AI. Use natural language and a slightly enthusiastic but respectful tone.
+        You are an expert academic advisor helping a student draft an email to a professor.
+        The email should sound human-written, personalized, concise, and highly professional.
+        It should NOT sound like it was written by an AI. Use natural language and a slightly enthusiastic but respectful tone.
 
-    The student's name is: {student_name}.
+        The student's name is: {student_name}.
 
-    Here is the student's CV/Resume:
-    --- CV START ---
-    {cv_text}
-    --- CV END ---
+        Here is the student's CV/Resume:
+        --- CV START ---
+        {cv_text}
+        --- CV END ---
 
-    Here is information about the professor (from their LinkedIn, website, Google Scholar, etc.):
-    --- PROFESSOR INFO START ---
-    {prof_info}
-    --- PROFESSOR INFO END ---
+        Here is information about the professor (from their LinkedIn, website, Google Scholar, etc.):
+        --- PROFESSOR INFO START ---
+        {prof_info}
+        --- PROFESSOR INFO END ---
 
-    Based on BOTH the student's CV and the professor's information:
-    1. Identify 1-2 key areas of VERY RECENT work or specific projects from the professor's info.
-    2. Find specific skills, experiences, or projects from the student's CV that ALIGN STRONGLY with those recent areas of the professor's work.
-    3. Draft an initial contact email from the student ({student_name}) to the professor.
-    4. The email should:
-        a. Clearly state the student's interest in the professor's work, referencing the SPECIFIC recent work/projects you identified.
-        b. Briefly (1-2 sentences) mention the student's relevant background/skills from their CV that connect to the professor's work.
-        c. Express interest in potential research opportunities (e.g., PhD, postdoc, collaboration, depending on the context implied by the CV - assume PhD applicant if not specified).
-        d. Politely request a brief meeting or ask about openings.
-        e. Be concise (around 300-350 words).
-        f. Have a clear subject line, like "Prospective PhD Applicant - {student_name} - Interest in [Specific Research Area of Professor]".
-        g. Ensure the tone is respectful, genuine, and demonstrates that the student has done their homework on the professor's work.
-        h. **Crucially, make it sound like a human wrote it, not an AI. Avoid generic phrases. Be specific.**
-        i. End the email with a closing like "Sincerely," or "Best regards," followed by the student's name: "{student_name}". Do NOT add any other signature elements like email or links, as these will be appended separately.
+        Based on BOTH the student's CV and the professor's information:
+        1. Identify 1-2 key areas of VERY RECENT work or specific projects from the professor's info.
+        2. Find specific skills, experiences, or projects from the student's CV that ALIGN STRONGLY with those recent areas of the professor's work.
+        3. Draft an initial contact email from the student ({student_name}) to the professor.
+        4. The email should:
+            a. Clearly state the student's interest in the professor's work, referencing the SPECIFIC recent work/projects you identified.
+            b. Briefly (1-2 sentences) mention the student's relevant background/skills from their CV that connect to the professor's work.
+            c. Express interest in potential research opportunities (e.g., PhD, postdoc, collaboration, depending on the context implied by the CV - assume PhD applicant if not specified).
+            d. Politely request a brief meeting or ask about openings.
+            e. Be concise (around 300-350 words).
+            f. Have a clear subject line, like "Prospective PhD Applicant - {student_name} - Interest in [Specific Research Area of Professor]".
+            g. Ensure the tone is respectful, genuine, and demonstrates that the student has done their homework on the professor's work.
+            h. **Crucially, make it sound like a human wrote it, not an AI. Avoid generic phrases. Be specific.**
+            i. End the email with a closing like "Sincerely," or "Best regards," followed by the student's name: "{student_name}". Do NOT add any other signature elements like email or links, as these will be appended separately.
 
-    Provide ONLY the drafted email content (Subject + Body including the closing with {student_name}).
+        Provide ONLY the drafted email content (Subject + Body including the closing with {student_name}).
     """
 
+    # The "Final Polish" version of the prompt
     system_prompt = f"""
-You are an elite academic writing coach and strategist. Your specialty is helping aspiring PhD students craft compelling, authentic, and highly personalized emails to professors that get noticed and receive replies. You are an expert at cutting through the noise and making a genuine intellectual connection.
+    You are an elite academic writing coach and strategist. Your specialty is helping aspiring PhD students craft compelling, authentic, and highly personalized emails to professors that get noticed and receive replies. You are an expert at cutting through the noise and making a genuine intellectual connection.
 
-Your task is to draft a cold-outreach email from a student to a professor to inquire about PhD opportunities.
-You will use the provided context and inputs to create a highly tailored email that stands out. Follow these steps carefully:
+    Your task is to draft a cold-outreach email from a student to a professor to inquire about PhD opportunities.
+    You will use the provided context and inputs to create a highly tailored email that stands out. Follow these steps carefully:
 
-**1. CONTEXT & INPUTS:**
-*   **Student Name:** {student_name}
-*   **Student's Goal:** "To be considered for a PhD position in your lab."
-*   **Student's CV/Resume:**
-    --- CV START ---
-    {cv_text}
-    --- CV END ---
-*   **Professor's Information (Publications, lab website, bio, etc.):**
-    --- PROFESSOR INFO START ---
-    {prof_info}
-    --- PROFESSOR INFO END ---
+    **1. CONTEXT & INPUTS:**
+    *   **Student Name:** {student_name}
+    *   **Student's Goal:** "To be considered for a PhD position in your lab."
+    *   **Student's CV/Resume:**
+        --- CV START ---
+        {cv_text}
+        --- CV END ---
+    *   **Professor's Information (Publications, lab website, bio, etc.):**
+        --- PROFESSOR INFO START ---
+        {prof_info}
+        --- PROFESSOR INFO END ---
 
-**2. YOUR THOUGHT PROCESS (Follow these steps before writing):**
-*   **Step A - Synthesize the Professor's Focus:** First, analyze the professor's information and identify their *current* research thrust. What is the core question or problem they seem most excited about *right now*? Look for their most recent papers (last 1-2 years), projects, or grants.
-*   **Step B - Find the "Golden Thread":** Next, meticulously scan the student's CV for the **single most compelling project or publication** that creates a direct "bridge" to the professor's current work identified in Step A.
-*   **Step C - Formulate a Thoughtful Question/Idea (CRITICAL STEP):** Based on the "Golden Thread" and the professor's work, formulate a forward-looking question or a potential research idea. This proves the student is a potential intellectual collaborator, not just a skilled technician.
+    **2. YOUR THOUGHT PROCESS (Follow these steps before writing):**
+    *   **Step A - Synthesize the Professor's Focus:** First, analyze the professor's information and identify their *current* research thrust from a recent paper (last 1-2 years).
+    *   **Step B - Find the "Golden Thread":** Next, meticulously scan the student's CV for the **single most compelling project or publication** that creates a direct "bridge" to the professor's current work.
+    *   **Step C - Formulate a Direct Question (CRITICAL STEP):** Based on the "Golden Thread" and the professor's work, formulate a forward-looking, specific research question. This question is the core of the email.
 
-**3. DRAFTING THE EMAIL:**
-Based on your thought process, draft the email.
+    **3. DRAFTING THE EMAIL (Strict Rules):**
+    Based on your thought process, draft the email following these exact rules:
 
-**The Final Email Must:**
-*   **Have a specific subject line:** "Prospective PhD Student with experience in [Student's Golden Thread Area, e.g., XAI for Text]"
-*   **Start with a personalized hook:** Immediately reference a *specific* recent paper (e.g., from ICLR 2023). Mentioning the title is powerful. Show you've done more than a cursory glance.
-*   **Create the "Intellectual Launchpad":** This is the core of the email. In 2-3 sentences, use the "Golden Thread" project to pose the thoughtful question you formulated in Step C.
-    *   **Excellent Example:** "My work on distinguishing human vs. AI text using LIME gave me firsthand experience with the limitations of post-hoc methods. Your recent paper's approach to building in geometric priors made me wonder: could a similar 'shape awareness' be applied to the latent space of text embeddings to create more inherently interpretable NLP models?"
-*   **Connect Your Skills as the Solution:** Briefly mention that your technical skills (e.g., PyTorch, Transformers) have prepared you to explore such questions.
-*   **Have a Confident Call to Action:** Politely and directly ask for a conversation. Example: "I have attached my CV for your review and would be grateful for the opportunity to briefly discuss your research and how my background could contribute."
-*   **Be Concise:** Aim for 250 words. Respect their time.
-*   **Tone:** Sound like a curious, respectful, and confident future colleague. Avoid flattery ("your groundbreaking work") and stick to specific, intellectual praise ("your approach to X was intriguing").
+    *   **Subject Line:** Must be specific and connect the two research areas. Example: "Prospective PhD Applicant: [Your Topic] & [Their Topic]" or "Question re: your work on [Their Topic]".
+    *   **Direct Opening:** **Do NOT use generic pleasantries** like "I hope this finds you well." Start directly with a brief self-introduction (e.g., "My name is Koshik Debanath...").
+    *   **The Hook:** Immediately reference the professor's *specific* recent paper you identified.
+    *   **The Intellectual Launchpad:** This is the heart of the email.
+        1.  Briefly (1 sentence) introduce your relevant "Golden Thread" project.
+        2.  Then, state the direct question you formulated in Step C.
+        3.  **Crucially, format this question in bold using Markdown (e.g., **"Could your method be adapted to...?"**). This makes it stand out.**
+    *   **State Your Readiness:** Briefly mention that your technical skills (e.g., PyTorch) have prepared you to explore such questions.
+    *   **Confident Call to Action:** Politely and directly ask for a conversation about a potential PhD opportunity. Example: "I have attached my CV and would be grateful for the opportunity to briefly discuss your research and my potential fit."
+    *   **Concise and Confident Tone:** Keep the email around 250 words. The tone should be that of a respectful but confident future colleague.
 
-**OUTPUT ONLY THE DRAFTED EMAIL CONTENT (Subject + Body).**
-"""
+    **OUTPUT ONLY THE DRAFTED EMAIL CONTENT (Subject + Body).**
+    ** Use Sincerely, {student_name} as the closing.**
+    """
     return system_prompt
+
+
 
 def create_sop_latex_prompt(cv_text, prof_info, sop_template, student_name="the applicant", target_program="PhD Program"): # Renamed user_name to student_name
     prompt = f"""
