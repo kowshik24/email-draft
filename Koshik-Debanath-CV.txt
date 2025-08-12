@@ -1,14 +1,19 @@
 Koshik Debanath
-
-Æ +8801855675763 | R koshik.debanath@gmail.com | ° LinkedIn |  GitHub |  Google Scholar |  Portfolio
++8801855675763 |
+koshik.debanath@gmail.com |
+LinkedIn |  GitHub |
+Google Scholar |  Portfolio
 Research Objective
 A highly motivated researcher with extensive experience in Natural Language Processing, Generative AI, and Deep
 Learning, evidenced by multiple peer-reviewed publications. Seeking to pursue a PhD to develop novel multi-modal
 models and explore their applications in complex reasoning and misinformation detection.
 Education
-Rajshahi University of Engineering & Technology Rajshahi, Bangladesh
-B.Sc. in Computer Science and Engineering CGPA: 3.27 / 4.00 Jan 2018 – Sep 2023
-• Relevant Coursework: Linear Algebra, Data Structures and Algorithms, Object Oriented
+Rajshahi University of Engineering & Technology
+B.Sc. in Computer Science and Engineering CGPA: 3.27 / 4.00
+•
+Rajshahi, Bangladesh
+Jan 2018 – Sep 2023
+Relevant Coursework: Linear Algebra, Data Structures and Algorithms, Object Oriented
 Programming, Discrete Mathematics, Database Management, Applied Statistics & Queuing Theory,
 Digital Image Processing, Neural Network and Fuzzy System, Artificial Intelligence, Data Mining
 Skills
@@ -23,7 +28,7 @@ Journal Articles
 Parameter Inference and Uncertainty Quantification in Reaction-Diffusion Models of Wound Healing,” Under
 review Mathematical Biosciences (July 2025). Preprint available at SSRN or DOI.
 Conferences
-• K. D. Nath, A. F. M. M. Rahman and M. A. Hossain, “An Attention-Based Deep Learning Approach to Knee
+• K. Debanath, A. F. M. M. Rahman and M. A. Hossain, “An Attention-Based Deep Learning Approach to Knee
 Injury Classification from MRI Images,” 2023 26th International Conference on Computer and Information
 Technology (ICCIT), Cox’s Bazar, Bangladesh, 2023, pp. 1-6, doi: 10.1109/ICCIT60459.2023.10441340.
 • K. Debanath, S. Aich and A. Y. Srizon, “Advancing Low-Resource NLP: Contextual Question Answering for
@@ -40,41 +45,48 @@ in 2nd International Conference on Next-Generation Computing, IoT and Machine Le
 Comprehensive Study Using Explainable Artificial Intelligence in Text Classification,” Accepted, To appear in 2nd
 International Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025).
 • K. Debanath, “Physics-Informed Neural Networks for Real-Time Anomaly Detection in Power System Dynamics,”
-Under Review, Submitted to 3rd International Conference on Big Data, IoT and Machine Learning (BIM 2025).
-
-Experience
-Manaknightdigital Inc. Toronto, ON, Canada (Remote)
-Data Scientist Mar 2023 – Apr 2025
-• Chatbot Development:
+Under Review, Submitted to 3rd International Conference on Big Data, IoT and Machine Learning (BIM 2025).Experience
+Manaknightdigital Inc.
+Toronto, ON, Canada (Remote)
+Data Scientist
+•
+Mar 2023 – Apr 2025
+Chatbot Development:
 ∗ Collected and processed product information using Excel, pandas, and openpyxl.
 ∗ Integrated GPT-4 to respond to user queries and manage token size limitations.
 ∗ Utilized libraries like nltk, sklearn, and Flask for deploying the chatbot.
-• Fraud Detection System:
+•
+Fraud Detection System:
 ∗ Performed EDA and feature extraction on transaction datasets.
 ∗ Developed and optimized ML models including Xgboost, SVC, and Logistic Regression.
 ∗ Achieved 90% accuracy in detecting fraudulent transactions and deployed the system using Flask.
-• Data-driven ChatBot for Financial Queries:
+•
+Data-driven ChatBot for Financial Queries:
 ∗ Implemented RAG and Pinecone, enhancing data retrieval speed by 40%, enabling faster decision-making for
 lenders.
 ∗ Improved data retrieval accuracy by 25% using Cohere reranking, resulting in more precise financial advice.
 ∗ Applied Beautiful Soup and PyPDF2 for data scraping and processing.
-• Sports Data Analysis ChatBot:
+•
+Sports Data Analysis ChatBot:
 ∗ Scraped and analyzed football data to predict match outcomes.
 ∗ Integrated RAG and Pinecone for efficient data querying and vector database management.
 ∗ Employed Beautiful Soup and PyPDF2 for data collection, analyzing 2 million football data points to achieve
 a 90% prediction accuracy, supporting strategic betting decisions.
-• Custom Image Generation System:
+•
+Custom Image Generation System:
 ∗ Developed an image generation platform using Stable Diffusion.
 ∗ Fine-tuned custom models to generate images based on user-defined presets.
 ∗ Utilized PyTorch and transformers for model training and deployment and finally used Docker for
 containerization.
-• AI-driven Data Matching System:
+•
+AI-driven Data Matching System:
 ∗ Organizational data was segmented using models such as Llama-2-7B and then fine-tuned to extract sections
 and subsections.
 ∗ Applied cosine similarity for matching data to specific tenders.
 ∗ Integrated GPT-4 for generating rationale from corresponding data.
 ∗ Matched organizational data against specific tenders, increasing successful tender submissions by 70%.
-• AI-Powered Collectible Authentication & Appraisal Platform:
+•
+AI-Powered Collectible Authentication & Appraisal Platform:
 ∗ Trained deep learning models (PyTorch/TensorFlow, e.g., InceptionV3, ResNet50, CLIP) for image
 classification (authenticity) and similarity search.
 ∗ Engineered an efficient CLIP+FAISS image similarity system for large-scale appraisal lookups.
@@ -82,34 +94,55 @@ classification (authenticity) and similarity search.
 ∗ Designed a multi-modal tag identification system using Serverless (RunPod API), TF-IDF, and CLIP/FAISS
 similarity.
 ∗ Implemented asynchronous data pipelines (aiohttp, asyncio, pandas) for large-scale image and metadata
-ingestion from APIs.
-
-∗ Developed a Streamlit web application for user image uploads and displaying similarity/appraisal results via
+ingestion from APIs.∗ Developed a Streamlit web application for user image uploads and displaying similarity/appraisal results via
 API calls.
-
-Universal Machine Inc. Sunnyvale, CA, USA (Remote)
-Software Engineer I Apr 2025 – Present
-• YouTube Live Stream Bot:
+Universal Machine Inc.
+Sunnyvale, CA, USA (Remote)
+Software Engineer I
+•
+Apr 2025 – Present
+YouTube Live Stream Bot:
 ∗ Developed Chrome Extension automating YouTube Live chat using JavaScript, Chrome APIs, and async
 requests.
 ∗ Integrated YouTube & OpenAI APIs for real-time chat fetching/posting and AI response generation.
 ∗ Engineered AI features managing conversational history (chrome.storage) and prompt engineering for
 context/recall.
 ∗ Implemented secure Google OAuth (chrome.identity) and robust error handling for external APIs.
-
+•
+cBORG DAO Governance Platform:
+∗ Built a full-stack decentralized governance platform using React/Next.js, FastAPI, PostgreSQL, and
+Ethereum smart contracts for community proposal voting and treasury management
+∗ Integrated OpenAI GPT-4o to automatically parse natural language chat messages into structured trading
+proposals (buy/sell/hold) with confidence scoring and real-time voting
+∗ Implemented SIWE (Sign-In With Ethereum) wallet linking with nonce-based authentication, JWT tokens,
+and privacy-preserving user identity management
+∗ Developed live chat with proposal detection, voting dashboards, and mobile-responsive UI using Socket.io,
+Tailwind CSS, and modern React patterns
+∗ Created Solidity smart contracts for automated proposal execution and member verification, deployed on
+Ethereum testnet with Hardhat development framework
+∗ Implemented rate limiting, CORS protection, encrypted sessions with Redis, and comprehensive
+authentication flows for secure Web3 application deployment
 Projects
 AI Investment Committee for Binance | GitHub | Streamlit App
-• Designed a multi-agent AI system with specialized agents to provide cryptocurrency investment recommendations.
-• Tech Stack: Python, OpenAI/Gemini API, Binance API, Streamlit, Pydantic.
+• Designed a multi-agent AI system with specialized agents to provide cryptocurrency investment recommendations
+• Tech Stack: Python, OpenAI/Gemini API, Binance API, Streamlit, Pydantic
 Stock Price Forecasting | BD App | Global App
 • Engineered LSTM models to forecast stock prices for Bangladeshi and global markets, deployed via Streamlit.
 • Tech Stack: Python, TensorFlow, Keras, LSTM, Pandas, Plotly, Streamlit, ‘bdshare‘.
+AI vs Human Generated Text Detector | WebApp
+• Developed an interactive web application to classify whether a given text is human-written or AI-generated
+• Preprocessed and cleaned the dataset, conducted Exploratory Data Analysis (EDA), and applied feature
+engineering techniques
+• Trained and optimized a Support Vector Classifier (SVC) using the *Machine Hack Competition* dataset: LLM
+Hackathon – Decoding Discourse: AI vs Human
+• Tech Stack: Flask, scikit-learn, Python, NumPy, Pandas, Matplotlib
 DataSciencePilot (RAG System) | GitHub
 • Built a chat-based interface to query custom PDFs using Pinecone for vector search and LLaMA-2 for generation.
 • Tech Stack: LangChain, Transformers, LLaMA-2, Pinecone, Python.
 CVAnalyzerPro | Streamlit App
-• Developed an AI tool to automatically score candidate CVs against company job requirements using LLMs.
-• Tech Stack: OpenAI API, Gemini API, Streamlit.
+•
+Developed an AI tool to automatically score candidate CVs against company job requirements using LLMs.•
+Tech Stack: OpenAI API, Gemini API, Streamlit.
 UberRidePrediction | PyPi | WebApp
 • Packaged an XGBoost model as a Python module to predict Uber fares and deployed it with FastAPI.
 • Tech Stack: Scikit-learn, XGBoost, CI/CD, FastAPI, Render.
@@ -126,7 +159,6 @@ CaptionCraft | StreamlitApp
 • Tech Stack: Gemini, Streamlit, Python.
 Market Price Prediction | GitHub
 • Implemented and compared multiple time-series models to predict product prices.
-
 • Models: ARIMA, SARIMAX, LSTM, GRU, XGBoost, Prophet.
 Movie Recommendation | WebApp
 • Implemented a KNN model using cosine similarity to recommend movies based on user input.
@@ -147,16 +179,22 @@ Predicting House Prices in Bengaluru: Ranked 24th out of 2,885 participants with
 Subscriber Prediction Talent Search Hackathon: Ranked 26th out of 5,045 participants.
 Analytics Olympiad 2022: Ranked 82nd out of 1,029 participants.
 Data Science Student Championship - South Zone: Ranked 73rd out of 554 participants.
-Decoding Discourse - AI vs Human: Ranked 5th out of 293 participants.
-Open Source Contributions
-• Contributed to OpenLLMetry, an open-source observability framework for LLM applications. (PR #1836)
+Decoding Discourse - AI vs Human: Ranked 5th out of 293 participants.Open Source Contributions
+• Contributed to OpenLLMetry, an open-source observability framework for LLM applications:
+• Resolved a bug where Python data classes passed as parameters were not being serialized and logged in
+workflows and tasks (PR #2800)
+• Implemented proper serialization support for dataclasses, ensuring they are correctly captured as inputs and
+outputs in observability logs
+• Added automated tests to verify serialization behavior and prevent regressions
+• Contributed to OpenLLMetry by fixing a TypeError in the OpenAI embeddings metrics handler caused by
+comparisons between NoneType and integers; implemented proper handling of None values with error logging.
+• Added automated tests to validate the fix and ensure the robustness of embeddings metrics processing.
+• Improved overall stability by preventing this error from impacting workflow execution.
+(PR #1836)
 • Contributed to Pinecone Canopy, a Retrieval-Augmented Generation (RAG) framework. (Commit)
-Relevant Coursework
-Major coursework: Linear Algebra, Data Structures and Algorithms, Object Oriented Programming, Discrete
-Mathematics, Database Management, Applied Statistics & Queuing Theory, Digital Image Processing, Neural Network
-and Fuzzy System, Artificial Intelligence, Data Mining
 Certifications & Professional Development
-Understanding and Applying Text Embeddings – DeepLearning.AI [Nov 2024]
+Understanding and Applying Text Embeddings – DeepLearning.AI
+[Nov 2024]
 A comprehensive short course on the end-to-end development of applications using text embeddings. Key topics included:
 – Fundamentals of creating, understanding, and visualizing embedding spaces.
 – Leveraging embeddings for practical applications like semantic search and retrieval.
