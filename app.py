@@ -39,20 +39,34 @@ except ImportError:
     st.warning("Pydantic library not found. Please install it: pip install pydantic")
 
 # --- LLM API Call Functions ---
+
+def is_gpt5_model(model_name):
+    """Check if the model is a GPT-5 variant that doesn't support temperature parameter."""
+    if not model_name:
+        return False
+    return model_name.lower().startswith(('gpt-5', 'gpt5'))
+
 def get_openai_response(api_key, prompt_text, model="gpt-4o-mini"): # Model is now passed as arg
     if not OpenAI:
         st.error("OpenAI library is not available.")
         return "OpenAI library error."
     try:
         client = OpenAI(api_key=api_key)
-        completion = client.chat.completions.create(
-            model=model,
-            messages=[
+        
+        # Prepare completion parameters
+        completion_params = {
+            "model": model,
+            "messages": [
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt_text}
-            ],
-            temperature=0.01
-        )
+            ]
+        }
+        
+        # Only add temperature for non-GPT5 models
+        if not is_gpt5_model(model):
+            completion_params["temperature"] = 0.01
+        
+        completion = client.chat.completions.create(**completion_params)
         return completion.choices[0].message.content
     except Exception as e:
         st.error(f"OpenAI API Error: {e}")
@@ -361,15 +375,20 @@ def search_professors_by_university_enhanced(university_name, cv_text, api_key, 
             if model in structured_output_models:
                 # Use the new structured outputs with Pydantic models
                 try:
-                    completion = client.chat.completions.parse(
-                        model=model,
-                        messages=[
+                    completion_params = {
+                        "model": model,
+                        "messages": [
                             {"role": "system", "content": "You are an expert academic researcher who finds professors matching student profiles from provided faculty information."},
                             {"role": "user", "content": prompt}
                         ],
-                        response_format=PhDPositionResult,
-                        temperature=0.1
-                    )
+                        "response_format": PhDPositionResult
+                    }
+                    
+                    # Only add temperature for non-GPT5 models
+                    if not is_gpt5_model(model):
+                        completion_params["temperature"] = 0.1
+                        
+                    completion = client.chat.completions.parse(**completion_params)
                     
                     result = completion.choices[0].message.parsed
                     
@@ -395,15 +414,20 @@ def search_professors_by_university_enhanced(university_name, cv_text, api_key, 
                     st.warning(f"Structured outputs failed, falling back to JSON mode: {e}")
             
             # Fallback to JSON mode for older models or if structured outputs fail
-            completion = client.chat.completions.create(
-                model=model,
-                messages=[
+            completion_params = {
+                "model": model,
+                "messages": [
                     {"role": "system", "content": "You are an expert academic researcher who finds professors matching student profiles from provided faculty information. Return your response in JSON format."},
                     {"role": "user", "content": prompt + "\n\nPlease return your response in JSON format with all required fields including title for each professor."}
                 ],
-                response_format={"type": "json_object"},
-                temperature=0.1
-            )
+                "response_format": {"type": "json_object"}
+            }
+            
+            # Only add temperature for non-GPT5 models
+            if not is_gpt5_model(model):
+                completion_params["temperature"] = 0.1
+            
+            completion = client.chat.completions.create(**completion_params)
             
             response_text = completion.choices[0].message.content
             data = json.loads(response_text)
@@ -811,14 +835,20 @@ def get_optimal_sending_time(prof_info):
 
     if api_choice == "OpenAI" and OpenAI:
         client = OpenAI(api_key=api_key)
-        completion = client.chat.completions.create(
-            model=selected_model,
-            messages=[
+        
+        completion_params = {
+            "model": selected_model,
+            "messages": [
                 {"role": "system", "content": system_prompt.format(prof_info=prof_info)},
                 {"role": "user", "content": ""}
-            ],
-            temperature=0.01
-        )
+            ]
+        }
+        
+        # Only add temperature for non-GPT5 models
+        if not is_gpt5_model(selected_model):
+            completion_params["temperature"] = 0.01
+            
+        completion = client.chat.completions.create(**completion_params)
         response = completion.choices[0].message.content.strip()
         return response
     elif api_choice == "Gemini" and genai:
@@ -943,15 +973,20 @@ def search_professors_by_university(university_name, cv_text, api_key, model, ap
             if model in structured_output_models:
                 # Use the new structured outputs with Pydantic models
                 try:
-                    completion = client.chat.completions.parse(
-                        model=model,
-                        messages=[
+                    completion_params = {
+                        "model": model,
+                        "messages": [
                             {"role": "system", "content": "You are an expert academic researcher who finds professors matching student profiles."},
                             {"role": "user", "content": prompt}
                         ],
-                        response_format=PhDPositionResult,
-                        temperature=0.1
-                    )
+                        "response_format": PhDPositionResult
+                    }
+                    
+                    # Only add temperature for non-GPT5 models
+                    if not is_gpt5_model(model):
+                        completion_params["temperature"] = 0.1
+                        
+                    completion = client.chat.completions.parse(**completion_params)
                     
                     result = completion.choices[0].message.parsed
                     
@@ -977,15 +1012,20 @@ def search_professors_by_university(university_name, cv_text, api_key, model, ap
                     st.warning(f"Structured outputs failed, falling back to JSON mode: {e}")
             
             # Fallback to JSON mode for older models or if structured outputs fail
-            completion = client.chat.completions.create(
-                model=model,
-                messages=[
+            completion_params = {
+                "model": model,
+                "messages": [
                     {"role": "system", "content": "You are an expert academic researcher who finds professors matching student profiles. Return your response in JSON format."},
                     {"role": "user", "content": prompt + "\n\nPlease return your response in JSON format with all required fields including title for each professor."}
                 ],
-                response_format={"type": "json_object"},
-                temperature=0.1
-            )
+                "response_format": {"type": "json_object"}
+            }
+            
+            # Only add temperature for non-GPT5 models
+            if not is_gpt5_model(model):
+                completion_params["temperature"] = 0.1
+            
+            completion = client.chat.completions.create(**completion_params)
             
             response_text = completion.choices[0].message.content
             data = json.loads(response_text)
