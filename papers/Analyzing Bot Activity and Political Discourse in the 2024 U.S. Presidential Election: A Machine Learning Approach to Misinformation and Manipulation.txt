@@ -1,0 +1,60 @@
+Analyzing Bot Activity and Political Discourse in the 2024 U.S. Presidential Election: A Machine Learning Approach to Misinformation and Manipulation
+
+Abstract—Social media has become a battleground for political
+discourse, with automated accounts (bots) playing a growing role
+in shaping public opinion and engagement. In the context of
+the 2024 U.S. Presidential Election, understanding bot activity is
+crucial for identifying potential misinformation and manipulation
+tactics. This study analyzes 50,191 tweets collected between
+May and July 2023 to assess bot prevalence and influence. Bot
+detection is conducted using Botometer API scores and a Random
+Forest Regressor (MSE: 0.0071, R²: 0.779), facilitating a multi-
+threshold analysis. Findings indicate a low overall bot presence
+(2.22% at a 0.7 threshold) but significant variations across
+political affiliations. While human-generated content dominates
+with a 15:1 engagement ratio, bots are most effective in cross-
+party discussions (engagement ratio: 0.145), whereas Democratic-
+focused bots exhibit the lowest engagement success. To deepen
+insights into election-related influence operations, a novel party-
+affiliation analysis framework is introduced, shedding light on
+platform-specific manipulation strategies and their implications
+for political discourse.
+
+Index Terms—Social Media Analysis, Social Media Bot Detec-
+tion, 2024 U.S. Presidential Election, Machine Learning, Political
+Discourse, Bot Activity.
+
+Conclusion:
+This study provides the first comprehensive analysis of
+bot activity during the 2024 US presidential election, reveal-
+ing evolving strategies in computational propaganda. While
+overall bot prevalence declined significantly from 2016 levels
+(2.22% vs. 9.7%), their targeted deployment in cross-party and
+Democratic-aligned discourse demonstrates persistent attempts
+to exploit political polarization. The stark engagement dis-
+parity (15:1 human-to-bot ratio) confirms limited persuasive
+impact but highlights bots’ role in agenda-setting through
+amplification. Methodologically, the hybrid detection frame-
+work—combining Botometer API verification with machine
+learning refinement proved robust, at the 0.7 threshold. The de-
+velopment of party-normalized engagement metrics addressed
+critical gaps in contextual impact assessment, revealing previ-
+ously obscured micro-targeting patterns.
+These findings carry urgent implications for election in-
+tegrity frameworks. While platform policies have reduced bot
+prevalence, their strategic adaptation to polarized environ-
+ments necessitates continuous monitoring. Future work should
+integrate multi-modal detection (text + image analysis) and
+real-time threshold adjustment to counter evolving tactics. As
+democracies grapple with AI-driven disinformation, this study
+establishes critical benchmarks for detecting and mitigating
+automated influence in electoral processes
+Our analysis reveals evolving bot tactics in the 2024 elec-
+tion discourse, particularly in cross-party engagement. While
+overall bot prevalence remains low (2.22%), their strategic
+deployment in specific contexts suggests sophisticated tar-
+geting. The demonstrated 15:1 engagement disparity favors
+human content, but high cross-party bot effectiveness warrants
+monitoring. Limitations are analysis limited to a single plat-
+form, potential bias in keyword-based party affiliation, limited
+timeframe of data collection.
