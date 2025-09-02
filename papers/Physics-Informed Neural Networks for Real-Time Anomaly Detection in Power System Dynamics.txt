@@ -1,0 +1,41 @@
+Physics-Informed Neural Networks for Real-Time Anomaly Detection in Power System Dynamics
+
+Abstract. The stability of modern power grids is paramount, yet they
+are increasingly vulnerable to dynamic disturbances. While data-driven
+machine learning models are powerful, they often lack interpretability
+and require vast labeled fault data. This paper proposes a novel frame-
+work for real-time anomaly detection using Physics-Informed Neural Net-
+works (PINNs). Our approach embeds the governing differential equation
+of power system dynamics—the swing equation—directly into the neu-
+ral network’s loss function. We demonstrate that a standard PINN ar-
+chitecture fails to capture the system’s oscillatory nature and introduce
+a stabilized training methodology incorporating Fourier Feature Map-
+ping and loss weight annealing to overcome this. By training the model
+on sparse data from only normal operating conditions, our framework
+accurately reconstructs the system’s state and uses the physics resid-
+ual as a robust, interpretable anomaly signal. Experimental results on
+a simulated Single-Machine Infinite Bus system show that our method
+instantaneously detects fault conditions with high precision. A compara-
+tive analysis with an LSTM-based model highlights the PINN’s superior
+signal clarity and interpretability. This work presents a data-efficient and
+physically-grounded solution for next-generation smart grid monitoring,
+validated against a common data-driven approach.
+
+Keywords: Physics-Informed Neural Networks, Anomaly Detection, Smart
+Grids, Machine Learning, Dynamical Systems, Comparative Analysis
+
+Conclusion
+In this paper, we have presented an effective framework for real-time anomaly
+detection in power systems using Physics-Informed Neural Networks. By embed-
+ding the governing swing equation into the network’s training, our model learns
+the fundamental dynamics of the system from extremely sparse data representing
+only normal operation. We demonstrated the necessity of a stabilized training
+approach, incorporating Fourier Feature Mapping and loss weight annealing, to
+successfully model the system’s oscillatory behavior. The key result is the use of
+the physics residual as a robust, interpretable, and instantaneous anomaly signal,
+achieving a detection SNR of over 44 dB. This approach overcomes the major
+limitations of purely data-driven methods by being exceptionally data-efficient
+and physically grounded, representing a significant step towards building more
+intelligent and reliable monitoring systems for the future Smart Grid. Future
+work will focus on extending this framework to more complex, multi-machine
+power systems and validating it on real-world PMU data.
