@@ -1,0 +1,29 @@
+Bayesian Physics-Informed Neural Networks for Parameter Inference and Uncertainty Quantification in Reaction-Diffusion Models of Wound Healing
+
+Abstract
+Predictive mathematical models of biological processes like wound healing are essential for quantitative understanding, but their clinical utility is often limited by a critical roadblock: uncertainty in their biophysical parameters. These parameters are difficult to measure directly and must be inferred from sparse, noisy data. This paper presents a Bayesian Physics-Informed Neural Network (BPINN) framework to address this challenge by performing robust parameter inference and principled uncertainty quantification. We frame the identification of unknown parameters in a coupled reaction-diffusion system for wound healing as a Bayesian inverse problem. By integrating sparse obser- vational data with the governing physical laws within a variational inference framework, the BPINN learns the full posterior distributions of unknown model parameters. Our results show that the framework accurately infers key reaction parameters from a dataset comprising less than 0.01% of the full spatio-temporal domain. More importantly, the BPINN correctly di- agnoses that the cell motility parameter is practically non-identifiable from the sparse data, a conclusion supported by the large posterior uncertainty it assigns. The model’s predictive uncertainty is well-calibrated, being high- est in regions far from observations. This work establishes the dual value of BPINNs as a powerful computational tool: both for developing reliable, personalized biomechanical models through data-driven calibration, and for diagnosing parameter identifiability issues—a critical step towards building trustworthy models in computational medicine and systems biology.
+
+Keywords: Bayesian Physics-Informed Neural Networks, UncertaintyQuantification, Inverse Problems, Reaction-Diffusion Systems, WoundHealing, Scientific Machine Learning
+
+Conclusion
+In this paper, we have utilized a Bayesian Physics-Informed Neural Network framework to address the challenging inverse problem of parameter
+inference in a PDE-based model of wound healing dynamics. By treating
+this as a Bayesian inference problem, our approach successfully moves beyond deterministic point estimates to provide full posterior distributions for
+unknown biophysical parameters and principled uncertainty quantification
+for model predictions.
+Our results demonstrate the dual strengths of this methodology for mathematical biology. First, the BPINN framework proved capable of accurately
+inferring the key reaction parameters of the model from a dataset that was
+both extremely sparse and corrupted by noise. This highlights its potential
+as a powerful tool for calibrating complex biological models against realistic
+experimental data. Second, and perhaps more importantly, the framework
+correctly diagnosed a practical non-identifiability issue with the cell motility
+parameter. Instead of converging to a wrong value with false confidence, the
+BPINN assigned a large, honest uncertainty to this parameter, effectively
+flagging it as unresolvable from the given data. This diagnostic capability is
+invaluable for building robust and trustworthy models, preventing the propagation of unacknowledged parameter uncertainty into clinical or scientific
+conclusions.
+The well-calibrated predictive uncertainty, which was shown to be lowest
+near data points and highest in unexplored regions of the domain, further
+underscores the reliability of the approach. By providing not just a prediction but also a measure of confidence, BPINNs can guide future experimental
+design. This work establishes BPINNs as a sophisticated and practical tool
+for the computational sciences, with significant potential to advance the development of personalized and predictive models in biology and medicine.
