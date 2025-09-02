@@ -1,0 +1,36 @@
+Distinguishing Human-Written and AI-Generated Text: A Comprehensive Study Using Explainable Artificial Intelligence in Text Classification
+Abstract—Enhancing interpretability without compromising
+accuracy is a critical challenge in text classification. This re-
+search explores the integration of Explainable Artificial In-
+telligence (XAI) techniques with advanced machine learning
+models, utilizing the Local Interpretable Model-Agnostic Expla-
+nations (LIME) framework to provide transparency. A fine-tuned
+BERT model achieved state-of-the-art performance, surpassing
+Random Forest and Sentence Embedding-based models with
+a perfect 100% accuracy (ROC-AUC score of 1.00). While
+Random Forest classifiers offered a solid baseline, they struggled
+with semantic nuances, underscoring the need for embedding-
+based approaches. The study highlights the inherent trade-off
+between interpretability and accuracy, demonstrating that while
+transformer-based models like BERT excel at capturing complex
+linguistic patterns, their ”black-box” nature necessitates tools
+like LIME for explainability. By bridging this gap, the research
+contributes to the development of more transparent, reliable, and
+high-performing AI systems.
+
+Index Terms—Explainable AI, Human vs AI Text Classifica-
+tion, LIME, Random Forest Classifier, BERT, Machine Learning
+Interpretability, Semantic Text Embeddings
+
+Conclusion:
+This study highlights the effectiveness of fine-tuned BERT
+in distinguishing between AI-generated and human-authored
+text, achieving superior performance across all evaluation met-
+rics. Semantic-rich embeddings from Sentence Transformers
+also contributed positively to classification tasks. Transformer-
+based models like fine-tuned BERT excel in handling complex
+language patterns, while ensemble methods like Random For-
+est, though effective as baselines, show limitations with deeper
+semantic features. Embedding-based approaches demonstrate
+a balance between interpretability and accuracy, making them
+valuable for text classification tasks.
