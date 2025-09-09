@@ -44,6 +44,32 @@ except ImportError:
     Optional = None
     st.warning("Pydantic library not found. Please install it: pip install pydantic")
 
+# --- Helper Functions ---
+
+def load_papers_from_folder(papers_folder="papers"):
+    """Load all .txt files from the papers folder and return their content."""
+    papers_content = []
+    papers_dir = os.path.join(os.path.dirname(__file__), papers_folder)
+    
+    if not os.path.exists(papers_dir):
+        return ""
+    
+    try:
+        for filename in os.listdir(papers_dir):
+            if filename.endswith('.txt'):
+                file_path = os.path.join(papers_dir, filename)
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    content = file.read().strip()
+                    if content:
+                        # Add paper title (filename without extension) and content
+                        paper_title = os.path.splitext(filename)[0]
+                        papers_content.append(f"**{paper_title}**\n{content}")
+        
+        return "\n\n".join(papers_content)
+    except Exception as e:
+        # Return empty string if there's any error reading files
+        return f"Error loading papers: {str(e)}"
+
 # --- LLM API Call Functions ---
 
 def is_gpt5_model(model_name):
@@ -531,6 +557,8 @@ def search_professors_by_university_enhanced(university_name, cv_text, api_key, 
 # --- Prompt Engineering Functions ---
 
 def create_email_prompt(cv_text, prof_info, student_name="the applicant"): # Renamed user_name to student_name
+    # Load papers from the folder
+    publications_content = load_papers_from_folder()
     prompt = f"""
         You are an expert academic advisor helping a student draft an email to a professor.
         The email should sound human-written, personalized, concise, and highly professional.
@@ -622,6 +650,10 @@ def create_email_prompt(cv_text, prof_info, student_name="the applicant"): # Ren
     --- CV START ---
     {cv_text}
     --- CV END ---
+    * Student Publications (research papers and projects that demonstrate expertise):
+    --- PUBLICATIONS START ---
+    {publications_content}
+    --- PUBLICATIONS END ---
     * Professor Information (papers, site excerpts, bios, etc.):
     --- PROFESSOR INFO START ---
     {prof_info}
