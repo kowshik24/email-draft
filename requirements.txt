@@ -1,6 +1,7 @@
 streamlit
 openai
 google-generativeai
+anthropic
 python-dotenv
 pytz
 tavily-python

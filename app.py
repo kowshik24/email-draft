@@ -23,6 +23,12 @@ except ImportError:
     st.warning("Google Generative AI library not found. Please install it: pip install google-generativeai")
 
 try:
+    import anthropic
+except ImportError:
+    anthropic = None
+    st.warning("Anthropic library not found. Please install it: pip install anthropic")
+
+try:
     from tavily import TavilyClient
 except ImportError:
     TavilyClient = None
@@ -83,6 +89,35 @@ def get_gemini_response(api_key, prompt_text, model_name="gemini-1.5-flash-lates
         return response.text
     except Exception as e:
         st.error(f"Gemini API Error: {e}")
+        return f"Error: {e}"
+
+def get_anthropic_response(api_key, prompt_text, model="claude-3-5-sonnet-20241022"):
+    if not anthropic:
+        st.error("Anthropic library is not available.")
+        return "Anthropic library error."
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
+        
+        message = client.messages.create(
+            model=model,
+            max_tokens=1000,
+            temperature=1,
+            system="You are a helpful assistant.",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": prompt_text
+                        }
+                    ]
+                }
+            ]
+        )
+        return message.content[0].text
+    except Exception as e:
+        st.error(f"Anthropic API Error: {e}")
         return f"Error: {e}"
 
 def extract_research_areas_from_cv(cv_text):
@@ -856,6 +891,18 @@ def get_optimal_sending_time(prof_info):
         model = genai.GenerativeModel(model_name=selected_model)
         response = model.generate_content(system_prompt.format(prof_info=prof_info))
         return response.text.strip()
+    elif api_choice == "Anthropic" and anthropic:
+        client = anthropic.Anthropic(api_key=api_key)
+        message = client.messages.create(
+            model=selected_model,
+            max_tokens=1000,
+            temperature=1,
+            system=system_prompt.format(prof_info=prof_info),
+            messages=[{"role": "user", "content": [{"type": "text", "text": ""}]}]
+        )
+        return message.content[0].text.strip()
+    else:
+        return "Error: No valid API available"
         
 
     
@@ -889,6 +936,8 @@ def get_professor_suggestions(cv_text, university_name, api_key, model, api_choi
         return get_openai_response(api_key, prompt, model=model)
     elif api_choice == "Gemini" and genai:
         return get_gemini_response(api_key, prompt, model_name=model)
+    elif api_choice == "Anthropic" and anthropic:
+        return get_anthropic_response(api_key, prompt, model=model)
     else:
         return "Error: No valid API available"
 
@@ -1085,6 +1134,33 @@ def search_professors_by_university(university_name, cv_text, api_key, model, ap
                     return f"Error parsing JSON: {e}. Raw response: {response}"
             else:
                 return f"Error: No JSON found in response. Raw response: {response}"
+        elif api_choice == "Anthropic" and anthropic:
+            # Fallback to regular response for Anthropic
+            response = get_anthropic_response(api_key, prompt, model=model)
+            
+            # Try to extract JSON from the response
+            json_start = response.find("{")
+            json_end = response.rfind("}") + 1
+            if json_start != -1 and json_end != 0:
+                json_str = response[json_start:json_end]
+                try:
+                    data = json.loads(json_str)
+                    # Add default values for missing fields
+                    for professor in data.get("professors", []):
+                        # Handle field name variations
+                        if "full_name" in professor and "name" not in professor:
+                            professor["name"] = professor.pop("full_name")
+                        
+                        if "title" not in professor:
+                            professor["title"] = "Professor"
+                        if "department" not in professor:
+                            professor["department"] = "Computer Science"
+                    data["hiring_analysis"] = []
+                    return PhDPositionResult(**data)
+                except json.JSONDecodeError as e:
+                    return f"Error parsing JSON: {e}. Raw response: {response}"
+            else:
+                return f"Error: No JSON found in response. Raw response: {response}"
         else:
             return "Error: No valid API available"
             
@@ -1260,7 +1336,7 @@ st.title("👨‍🏫 Professor Outreach Assistant 📧")
 
 # --- Sidebar ---
 st.sidebar.header("API Configuration")
-api_choice = st.sidebar.selectbox("Select LLM API", ["OpenAI", "Gemini"])
+api_choice = st.sidebar.selectbox("Select LLM API", ["OpenAI", "Gemini", "Anthropic"])
 api_key = ""
 selected_model = ""
 
@@ -1282,14 +1358,25 @@ if api_choice == "OpenAI":
         
         client = OpenAI(api_key=api_key)
         # List of common OpenAI models
-        OPENAI_MODELS = client.models.list()
-        # """
-        # SyncPage[Model](data=[Model(id='gpt-4-0613', created=1686588896, object='model', owned_by='openai'), Model(id='gpt-4', created=1687882411, object='model', owned_by='openai'), Model(id='gpt-3.5-turbo', created=1677610602, object='model', owned_by='openai'), Model(id='o4-mini-deep-research-2025-06-26', created=1750866121, object='model', owned_by='system'), Model(id='o3-pro-2025-06-10', created=1749166761, object='model', owned_by='system'), Model(id='o4-mini-deep-research', created=1749685485, object='model', owned_by='system'), Model(id='o3-deep-research', created=1749840121, object='model', owned_by='system'), Model(id='o3-deep-research-2025-06-26', created=1750865219, object='model', owned_by='system'), Model(id='davinci-002', created=1692634301, object='model', owned_by='system'), Model(id='babbage-002', created=1692634615, object='model', owned_by='system'), Model(id='gpt-3.5-turbo-instruct', created=1692901427, object='model', owned_by='system'), Model(id='gpt-3.5-turbo-instruct-0914', created=1694122472, object='model', owned_by='system'), Model(id='dall-e-3', created=1698785189, object='model', owned_by='system'), Model(id='dall-e-2', created=1698798177, object='model', owned_by='system'), Model(id='gpt-4-1106-preview', created=1698957206, object='model', owned_by='system'), Model(id='gpt-3.5-turbo-1106', created=1698959748, object='model', owned_by='system'), Model(id='tts-1-hd', created=1699046015, object='model', owned_by='system'), Model(id='tts-1-1106', created=1699053241, object='model', owned_by='system'), Model(id='tts-1-hd-1106', created=1699053533, object='model', owned_by='system'), Model(id='text-embedding-3-small', created=1705948997, object='model', owned_by='system'), Model(id='text-embedding-3-large', created=1705953180, object='model', owned_by='system'), Model(id='gpt-4-0125-preview', created=1706037612, object='model', owned_by='system'), Model(id='gpt-4-turbo-preview', created=1706037777, object='model', owned_by='system'), Model(id='gpt-3.5-turbo-0125', created=1706048358, object='model', owned_by='system'), Model(id='gpt-4-turbo', created=1712361441, object='model', owned_by='system'), Model(id='gpt-4-turbo-2024-04-09', created=1712601677, object='model', owned_by='system'), Model(id='gpt-4o', created=1715367049, object='model', owned_by='system'), Model(id='gpt-4o-2024-05-13', created=1715368132, object='model', owned_by='system'), Model(id='gpt-4o-mini-2024-07-18', created=1721172717, object='model', owned_by='system'), Model(id='gpt-4o-mini', created=1721172741, object='model', owned_by='system'), Model(id='gpt-4o-2024-08-06', created=1722814719, object='model', owned_by='system'), Model(id='chatgpt-4o-latest', created=1723515131, object='model', owned_by='system'), Model(id='o1-preview-2024-09-12', created=1725648865, object='model', owned_by='system'), Model(id='o1-preview', created=1725648897, object='model', owned_by='system'), Model(id='o1-mini-2024-09-12', created=1725648979, object='model', owned_by='system'), Model(id='o1-mini', created=1725649008, object='model', owned_by='system'), Model(id='gpt-4o-realtime-preview-2024-10-01', created=1727131766, object='model', owned_by='system'), Model(id='gpt-4o-audio-preview-2024-10-01', created=1727389042, object='model', owned_by='system'), Model(id='gpt-4o-audio-preview', created=1727460443, object='model', owned_by='system'), Model(id='gpt-4o-realtime-preview', created=1727659998, object='model', owned_by='system'), Model(id='omni-moderation-latest', created=1731689265, object='model', owned_by='system'), Model(id='omni-moderation-2024-09-26', created=1732734466, object='model', owned_by='system'), Model(id='gpt-4o-realtime-preview-2024-12-17', created=1733945430, object='model', owned_by='system'), Model(id='gpt-4o-audio-preview-2024-12-17', created=1734034239, object='model', owned_by='system'), Model(id='gpt-4o-mini-realtime-preview-2024-12-17', created=1734112601, object='model', owned_by='system'), Model(id='gpt-4o-mini-audio-preview-2024-12-17', created=1734115920, object='model', owned_by='system'), Model(id='o1-2024-12-17', created=1734326976, object='model', owned_by='system'), Model(id='o1', created=1734375816, object='model', owned_by='system'), Model(id='gpt-4o-mini-realtime-preview', created=1734387380, object='model', owned_by='system'), Model(id='gpt-4o-mini-audio-preview', created=1734387424, object='model', owned_by='system'), Model(id='computer-use-preview', created=1734655677, object='model', owned_by='system'), Model(id='o3-mini', created=1737146383, object='model', owned_by='system'), Model(id='o3-mini-2025-01-31', created=1738010200, object='model', owned_by='system'), Model(id='gpt-4o-2024-11-20', created=1739331543, object='model', owned_by='system'), Model(id='gpt-4.5-preview', created=1740623059, object='model', owned_by='system'), Model(id='gpt-4.5-preview-2025-02-27', created=1740623304, object='model', owned_by='system'), Model(id='computer-use-preview-2025-03-11', created=1741377021, object='model', owned_by='system'), Model(id='gpt-4o-search-preview-2025-03-11', created=1741388170, object='model', owned_by='system'), Model(id='gpt-4o-search-preview', created=1741388720, object='model', owned_by='system'), Model(id='gpt-4o-mini-search-preview-2025-03-11', created=1741390858, object='model', owned_by='system'), Model(id='gpt-4o-mini-search-preview', created=1741391161, object='model', owned_by='system'), Model(id='gpt-4o-transcribe', created=1742068463, object='model', owned_by='system'), Model(id='gpt-4o-mini-transcribe', created=1742068596, object='model', owned_by='system'), Model(id='o1-pro-2025-03-19', created=1742251504, object='model', owned_by='system'), Model(id='o1-pro', created=1742251791, object='model', owned_by='system'), Model(id='gpt-4o-mini-tts', created=1742403959, object='model', owned_by='system'), Model(id='o3-2025-04-16', created=1744133301, object='model', owned_by='system'), Model(id='o4-mini-2025-04-16', created=1744133506, object='model', owned_by='system'), Model(id='o3', created=1744225308, object='model', owned_by='system'), Model(id='o4-mini', created=1744225351, object='model', owned_by='system'), Model(id='gpt-4.1-2025-04-14', created=1744315746, object='model', owned_by='system'), Model(id='gpt-4.1', created=1744316542, object='model', owned_by='system'), Model(id='gpt-4.1-mini-2025-04-14', created=1744317547, object='model', owned_by='system'), Model(id='gpt-4.1-mini', created=1744318173, object='model', owned_by='system'), Model(id='gpt-4.1-nano-2025-04-14', created=1744321025, object='model', owned_by='system'), Model(id='gpt-4.1-nano', created=1744321707, object='model', owned_by='system'), Model(id='gpt-image-1', created=1745517030, object='model', owned_by='system'), Model(id='codex-mini-latest', created=1746673257, object='model', owned_by='system'), Model(id='o3-pro', created=1748475349, object='model', owned_by='system'), Model(id='gpt-4o-realtime-preview-2025-06-03', created=1748907838, object='model', owned_by='system'), Model(id='gpt-4o-audio-preview-2025-06-03', created=1748908498, object='model', owned_by='system'), Model(id='gpt-3.5-turbo-16k', created=1683758102, object='model', owned_by='openai-internal'), Model(id='tts-1', created=1681940951, object='model', owned_by='openai-internal'), Model(id='whisper-1', created=1677532384, object='model', owned_by='openai-internal'), Model(id='text-embedding-ada-002', created=1671217299, object='model', owned_by='openai-internal')], object='list')
-        # """
-
-        # Filter models to show only common ones
-        common_models = [model.id for model in OPENAI_MODELS.data if "gpt" in model.id.lower() and "latest" not in model.id.lower()]
-        common_models = sorted(common_models)  # Sort models alphabetically
+        try:
+            if api_key:
+                OPENAI_MODELS = client.models.list()
+                # Filter models to show only common ones
+                common_models = [model.id for model in OPENAI_MODELS.data if "gpt" in model.id.lower() and "latest" not in model.id.lower()]
+                common_models = sorted(common_models)  # Sort models alphabetically
+            else:
+                # Fallback models when no API key
+                common_models = [
+                    "gpt-4o-mini", "gpt-4o", "gpt-3.5-turbo", "gpt-4-turbo", 
+                    "gpt-4", "o1-mini", "o1-preview"
+                ]
+        except Exception as e:
+            # Fallback models when API call fails
+            st.sidebar.warning(f"Could not fetch OpenAI models: {e}")
+            common_models = [
+                "gpt-4o-mini", "gpt-4o", "gpt-3.5-turbo", "gpt-4-turbo", 
+                "gpt-4", "o1-mini", "o1-preview"
+            ]
 
         selected_model = st.sidebar.selectbox(
             "Select OpenAI Model",
@@ -1309,10 +1396,25 @@ elif api_choice == "Gemini":
             st.sidebar.caption("Gemini API Key loaded from .env")
 
 
-        GEMINI_MODELS = genai.list_models()  # Get available Gemini models
-        # Filter models to show only common ones
-        common_models = [model.name for model in GEMINI_MODELS if "gemini" in model.name.lower() and "latest" not in model.name]
-        common_models = sorted(common_models)  # Sort models alphabetically
+        try:
+            if api_key:
+                GEMINI_MODELS = genai.list_models()  # Get available Gemini models
+                # Filter models to show only common ones
+                common_models = [model.name for model in GEMINI_MODELS if "gemini" in model.name.lower() and "latest" not in model.name]
+                common_models = sorted(common_models)  # Sort models alphabetically
+            else:
+                # Fallback models when no API key
+                common_models = [
+                    "gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro", 
+                    "gemini-2.0-flash-exp"
+                ]
+        except Exception as e:
+            # Fallback models when API call fails
+            st.sidebar.warning(f"Could not fetch Gemini models: {e}")
+            common_models = [
+                "gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro", 
+                "gemini-2.0-flash-exp"
+            ]
 
         selected_model = st.sidebar.selectbox(
             "Select Gemini Model",
@@ -1322,6 +1424,58 @@ elif api_choice == "Gemini":
         )
     else:
         st.sidebar.warning("Gemini library not loaded.")
+elif api_choice == "Anthropic":
+    if anthropic:
+        # Attempt to get API key from .env first
+        api_key = os.getenv("ANTHROPIC_API_KEY")
+        if not api_key:
+            api_key = st.sidebar.text_input("Enter your Anthropic API Key", type="password", help="Store as ANTHROPIC_API_KEY in .env to load automatically.")
+        else:
+            st.sidebar.caption("Anthropic API Key loaded from .env")
+
+        if api_key:
+            try:
+                client = anthropic.Anthropic(api_key=api_key)
+                ANTHROPIC_MODELS = client.models.list(limit=20)  # Get available Anthropic models
+                
+                # Filter models to show only common ones
+                common_models = [model.id for model in ANTHROPIC_MODELS.data if "claude" in model.id.lower()]
+                common_models = sorted(common_models, reverse=True)  # Sort models by recency (newer first)
+
+                selected_model = st.sidebar.selectbox(
+                    "Select Anthropic Model",
+                    common_models,  # Use the filtered list of common models
+                    index=0 # Default to first (most recent) model
+                )
+            except Exception as e:
+                st.sidebar.error(f"Error fetching Anthropic models: {e}")
+                # Fallback to hardcoded models
+                fallback_models = [
+                    "claude-3-5-sonnet-20241022",
+                    "claude-3-5-haiku-20241022", 
+                    "claude-3-opus-20240229",
+                    "claude-3-haiku-20240307"
+                ]
+                selected_model = st.sidebar.selectbox(
+                    "Select Anthropic Model (fallback)",
+                    fallback_models,
+                    index=0
+                )
+        else:
+            # Show fallback models when no API key
+            fallback_models = [
+                "claude-3-5-sonnet-20241022",
+                "claude-3-5-haiku-20241022", 
+                "claude-3-opus-20240229",
+                "claude-3-haiku-20240307"
+            ]
+            selected_model = st.sidebar.selectbox(
+                "Select Anthropic Model",
+                fallback_models,
+                index=0
+            )
+    else:
+        st.sidebar.warning("Anthropic library not loaded.")
 
 
 st.sidebar.header("Your Information")
@@ -1438,6 +1592,8 @@ with tabs[0]:
                     generated_email_body = get_openai_response(api_key, email_prompt_text, model=selected_model)
                 elif api_choice == "Gemini" and genai:
                     generated_email_body = get_gemini_response(api_key, email_prompt_text, model_name=selected_model)
+                elif api_choice == "Anthropic" and anthropic:
+                    generated_email_body = get_anthropic_response(api_key, email_prompt_text, model=selected_model)
                 else:
                     st.error(f"{api_choice} API not available or library not loaded.")
 
@@ -1462,6 +1618,8 @@ with tabs[0]:
                         generated_sop_latex = get_openai_response(api_key, sop_prompt_text, model=selected_model)
                     elif api_choice == "Gemini" and genai:
                         generated_sop_latex = get_gemini_response(api_key, sop_prompt_text, model_name=selected_model)
+                    elif api_choice == "Anthropic" and anthropic:
+                        generated_sop_latex = get_anthropic_response(api_key, sop_prompt_text, model=selected_model)
                     else:
                         st.error(f"{api_choice} API not available or library not loaded.")
 
