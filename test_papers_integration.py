@@ -20,9 +20,9 @@ def test_load_papers_from_folder():
     assert len(papers_content) > 0, "No papers content loaded"
     print(f"✅ Papers loaded successfully ({len(papers_content)} characters)")
     
-    # Check that multiple papers are included (should contain paper titles in bold)
-    assert "**" in papers_content, "Papers should have bold titles"
-    print("✅ Papers have proper title formatting")
+    # Check that multiple papers are included (content should be from the papers themselves)
+    assert "Abstract" in papers_content, "Papers should contain abstracts"
+    print("✅ Papers contain expected content")
     
     # Check for specific expected papers
     expected_papers = [
@@ -101,15 +101,10 @@ def test_papers_content_format():
     assert len(papers_sections) > 1, "Papers should be separated by double newlines"
     print(f"✅ Papers properly separated ({len(papers_sections)} sections)")
     
-    # Check that at least one paper has a title in bold
-    has_bold_title = False
-    for section in papers_sections:
-        if section.startswith("**") and "**" in section[2:]:
-            has_bold_title = True
-            break
-    
-    assert has_bold_title, "At least one paper should have a bold title"
-    print("✅ Papers have proper bold title formatting")
+    # Check that papers contain expected content (abstracts, conclusions, etc.)
+    has_academic_content = "Abstract" in papers_content or "Conclusion" in papers_content
+    assert has_academic_content, "Papers should contain academic content like abstracts or conclusions"
+    print("✅ Papers contain proper academic content")
 
 
 if __name__ == "__main__":

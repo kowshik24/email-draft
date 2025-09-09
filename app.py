@@ -61,9 +61,8 @@ def load_papers_from_folder(papers_folder="papers"):
                 with open(file_path, 'r', encoding='utf-8') as file:
                     content = file.read().strip()
                     if content:
-                        # Add paper title (filename without extension) and content
-                        paper_title = os.path.splitext(filename)[0]
-                        papers_content.append(f"**{paper_title}**\n{content}")
+                        # Just append the whole content without filtering
+                        papers_content.append(content)
         
         return "\n\n".join(papers_content)
     except Exception as e:
