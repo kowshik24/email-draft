@@ -923,7 +923,7 @@ Create a complete, professional research statement in LaTeX format that:
 - Propose feasible research directions that build on both your work and theirs
 
 **5. LATEX FORMAT REQUIREMENTS:**
-- Use \\documentclass{article} or similar professional class
+- Use \\documentclass article or similar professional class
 - Include appropriate packages (geometry, times, url, etc.)
 - Proper sectioning with \\section and \\subsection
 - Professional title and author information
