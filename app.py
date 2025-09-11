@@ -559,38 +559,90 @@ def create_email_prompt(cv_text, prof_info, student_name="the applicant"): # Ren
     # Load papers from the folder
     publications_content = load_papers_from_folder()
     prompt = f"""
-        You are an expert academic advisor helping a student draft an email to a professor.
-        The email should sound human-written, personalized, concise, and highly professional.
-        It should NOT sound like it was written by an AI. Use natural language and a slightly enthusiastic but respectful tone.
+You are an expert academic advisor helping a student write an effective cold email to a potential supervisor for PhD or MSc admissions. Your goal is to create a compelling, personalized, and authentic email that will get a response from busy professors.
 
-        The student's name is: {student_name}.
+Follow these specific guidelines for writing effective cold emails:
 
-        Here is the student's CV/Resume:
-        --- CV START ---
-        {cv_text}
-        --- CV END ---
+**STUDENT INFORMATION:**
+Student Name: {student_name}
 
-        Here is information about the professor (from their LinkedIn, website, Google Scholar, etc.):
-        --- PROFESSOR INFO START ---
-        {prof_info}
-        --- PROFESSOR INFO END ---
+**STUDENT'S CV/RESUME:**
+--- CV START ---
+{cv_text}
+--- CV END ---
 
-        Based on BOTH the student's CV and the professor's information:
-        1. Identify 1-2 key areas of VERY RECENT work or specific projects from the professor's info.
-        2. Find specific skills, experiences, or projects from the student's CV that ALIGN STRONGLY with those recent areas of the professor's work.
-        3. Draft an initial contact email from the student ({student_name}) to the professor.
-        4. The email should:
-            a. Clearly state the student's interest in the professor's work, referencing the SPECIFIC recent work/projects you identified.
-            b. Briefly (1-2 sentences) mention the student's relevant background/skills from their CV that connect to the professor's work.
-            c. Express interest in potential research opportunities (e.g., PhD, postdoc, collaboration, depending on the context implied by the CV - assume PhD applicant if not specified).
-            d. Politely request a brief meeting or ask about openings.
-            e. Be concise (around 300-350 words).
-            f. Have a clear subject line, like "Prospective PhD Applicant - {student_name} - Interest in [Specific Research Area of Professor]".
-            g. Ensure the tone is respectful, genuine, and demonstrates that the student has done their homework on the professor's work.
-            h. **Crucially, make it sound like a human wrote it, not an AI. Avoid generic phrases. Be specific.**
-            i. End the email with a closing like "Sincerely," or "Best regards," followed by the student's name: "{student_name}". Do NOT add any other signature elements like email or links, as these will be appended separately.
+**STUDENT'S PUBLICATIONS:**
+--- PUBLICATIONS START ---
+{publications_content}
+--- PUBLICATIONS END ---
 
-        Provide ONLY the drafted email content (Subject + Body including the closing with {student_name}).
+**PROFESSOR'S INFORMATION:**
+--- PROFESSOR INFO START ---
+{prof_info}
+--- PROFESSOR INFO END ---
+
+**EMAIL STRUCTURE REQUIREMENTS:**
+
+**1. SUBJECT LINE:**
+Format: "Prospective PhD/MSc Applicant for [Term] Interested in [Research Area]"
+Example: "Prospective PhD Applicant for Fall 2026 Interested in Machine Learning"
+- State that you are a prospective applicant
+- Specify the term (Fall 2026/Spring 2027)
+- End with your research interest that matches the professor's work
+
+**2. ADDRESSING:**
+Address the professor by their last name: "Dear Prof. [LastName],"
+
+**3. EMAIL BODY - THREE CONNECTED SECTIONS:**
+
+**Section 1: Introduction (40-50 words)**
+- Start with "Good Morning" or "Good Day" (NO generic phrases like "I hope you are doing well")
+- Introduce yourself with current affiliation and current research
+- Mention your most recently attained degree
+- Do NOT mention CGPA unless you have distinction (summa cum laude, magna cum laude) or top 5% of class
+- Be concise and represent yourself within the word limit
+
+**Section 2: Interest (Maximum 120 words) - MOST CRUCIAL SECTION**
+- **CRITICAL: Do NOT use generic or AI-generated language. This must sound human-written.**
+- Start by explaining why you are interested in the professor's research
+- Mention any current GRANT (if this mentioned on the Professor's Information) they have that aligns with your interests, or follow their recent research trends
+- Reference specific recently published papers by the professor (where they are first or last author)
+- Discuss the professor's research technically and comprehensively
+- Briefly incorporate why you are interested in this research
+- Include a potential research question about the topic (NOT AI-generated - develop from reading papers)
+- **Make this highly specific and show you've done deep research on their work**
+- **Avoid copying any phrases from their papers - paraphrase authentically**
+
+**Section 3: Your Research (80-100 words)**
+- Concisely describe your research and where it was published
+- Show you have published research papers in the domain relevant to the professor
+- Connect your work to the professor's research area
+- Be specific about your contributions and achievements
+
+**4. ATTACHMENTS:**
+End by mentioning you are attaching your CV and research statement(only if asked by the Professor otherwise it's optional)
+
+**5. CLOSING:**
+Use "Sincerely," followed by "{student_name}" (no additional signature elements)
+
+**TONE AND STYLE REQUIREMENTS:**
+- Sound human-written, NOT AI-generated
+- Be specific and avoid generic phrases
+- Show genuine intellectual curiosity
+- Demonstrate you've spent time researching the professor's work
+- Be respectful but confident
+- Avoid flattery - use specificity instead
+- Keep total email around 250-300 words
+- **Quality over quantity - this should be a tailored, high-quality email**
+
+**CRITICAL INSTRUCTIONS:**
+- Do NOT sound robotic or use LLM-generated language
+- Spend the equivalent of "hours" crafting this email through your analysis
+- Make genuine intellectual connections between student's work and professor's research
+- Show you understand the professor's recent research direction
+- Demonstrate authentic interest through specific technical discussion
+
+Provide ONLY the drafted email content (Subject + Body including the closing with {student_name}).
     """
 
     # The "Final Polish" version of the prompt
@@ -809,6 +861,91 @@ def create_sop_latex_prompt(cv_text, prof_info, sop_template, student_name="the 
     `My primary research interest lies in [Specific Area from Prof's work, e.g., Reinforcement Learning for Robotics]. I am particularly drawn to Professor [Professor's Last Name]'s work on [Specific Project/Paper of Professor] at [University Name], as it directly aligns with my project on [Student's relevant project from CV].`
 
     Begin the output directly with the LaTeX code (e.g., `\\documentclass{{article}}`). Do not add any preamble like "Here is the updated SOP:".
+    """
+    return prompt
+
+def create_research_statement_prompt(cv_text, prof_info, student_name="Koshik Debanath"):
+    """Create prompt for generating a research statement in LaTeX format based on professor's profile and publications."""
+    # Load papers from the folder
+    publications_content = load_papers_from_folder()
+    
+    prompt = f"""
+You are an expert academic advisor helping a student create a comprehensive Research Statement in LaTeX format for a specific professor. This research statement will be used as part of a PhD application or collaboration inquiry.
+
+**STUDENT INFORMATION:**
+Student Name: {student_name}
+
+**STUDENT'S CV/RESUME:**
+--- CV START ---
+{cv_text}
+--- CV END ---
+
+**STUDENT'S PUBLICATIONS:**
+--- PUBLICATIONS START ---
+{publications_content}
+--- PUBLICATIONS END ---
+
+**PROFESSOR'S INFORMATION (All Details + Publications):**
+--- PROFESSOR INFO START ---
+{prof_info}
+--- PROFESSOR INFO END ---
+
+**RESEARCH STATEMENT REQUIREMENTS:**
+
+Create a complete, professional research statement in LaTeX format that:
+
+**1. STRUCTURE:**
+- Uses proper LaTeX document structure with appropriate packages
+- Includes: Introduction, Research Background, Current Research Interests, Proposed Research Directions, Alignment with Professor's Work, Conclusion
+- Should be 1-2 pages when compiled
+- Professional academic formatting
+
+**2. CONTENT REQUIREMENTS:**
+- **Introduction**: Brief overview of your research journey and current focus
+- **Research Background**: Summarize your previous research experience and publications
+- **Current Research Interests**: Detail your specific areas of interest that align with the professor
+- **Proposed Research Directions**: Specific research questions/directions you want to pursue
+- **Alignment with Professor's Work**: Detailed analysis of how your interests align with the professor's recent publications and research
+- **Future Goals**: Your vision for research collaboration and contribution to the field
+- **Conclusion**: Concise summary of your research vision
+
+**3. PROFESSOR ALIGNMENT:**
+- Analyze the professor's recent publications and research trends
+- Identify specific papers, projects, or research directions that align with your background
+- Propose potential research collaborations or extensions of their work
+- Show deep understanding of their research methodology and contributions
+- Reference specific publications by the professor where relevant
+
+**4. TECHNICAL DEPTH:**
+- Demonstrate technical competency in relevant areas
+- Reference your own publications and how they relate to the professor's work
+- Show understanding of current challenges and opportunities in the field
+- Propose feasible research directions that build on both your work and theirs
+
+**5. LATEX FORMAT REQUIREMENTS:**
+- Use \\documentclass{article} or similar professional class
+- Include appropriate packages (geometry, times, url, etc.)
+- Proper sectioning with \\section and \\subsection
+- Professional title and author information
+- Proper citations if referencing specific papers (use simple format)
+- Clean, academic formatting throughout
+
+**6. TONE AND STYLE:**
+- Professional and academic tone
+- Show enthusiasm for research without being overly casual
+- Demonstrate intellectual maturity and research vision
+- Be specific and avoid generic statements
+- Show genuine interest in the professor's work through detailed analysis
+
+**OUTPUT INSTRUCTIONS:**
+- Provide ONLY the complete LaTeX code
+- Start directly with \\documentclass
+- No explanatory text before or after the LaTeX code
+- Ensure the document is ready to compile
+- Include all necessary LaTeX commands and structure
+- Make sure all sections flow logically and professionally
+
+The research statement should be compelling, technically sound, and clearly demonstrate why you would be an excellent fit for the professor's research program.
     """
     return prompt
 
@@ -1577,7 +1714,7 @@ Professor %%PROFESSOR_NAME%%'s work on %%MENTION_PROFESSOR_WORK_ALIGNMENT%% at %
     )
 
 # --- Main Page ---
-tabs = st.tabs(["✉️ Email Draft", "👨‍🏫 Professor Suggestions", "🎓 PhD Position Finder", "🤖 Cohere Professor Finder", "🌐 OpenAI Web Search"])
+tabs = st.tabs(["✉️ Email Draft", "📄 Research Statement", "👨‍🏫 Professor Suggestions", "🎓 PhD Position Finder", "🤖 Cohere Professor Finder", "🌐 OpenAI Web Search"])
 
 with tabs[0]:
     st.header("Professor's Information")
@@ -1671,6 +1808,104 @@ with tabs[0]:
                     st.error(generated_sop_latex)
 
 with tabs[1]:
+    st.header("📄 Research Statement Generator")
+    st.markdown("""
+    Generate a comprehensive research statement in LaTeX format tailored to a specific professor's research profile and publications.
+    This tool analyzes the professor's work and creates a research statement that demonstrates your alignment with their research.
+    """)
+    
+    prof_info_research = st.text_area(
+        "Professor's Complete Information (Include ALL details + Publications)",
+        height=300,
+        placeholder="""Paste comprehensive professor information including:
+- Full name, title, department, university
+- Complete research profile and current projects
+- Recent publications (last 3-5 years)
+- Research interests and focus areas
+- Lab information and current work
+- Any grants or funding information
+- Academic background and career highlights
+
+Example:
+Dr. Jane Smith, Professor of Computer Science at University of Technology
+Research Focus: Machine Learning, Natural Language Processing, Computer Vision
+Recent Publications:
+1. "Advanced NLP Models for Healthcare" (2024) - Nature Machine Intelligence
+2. "Multi-modal Learning Systems" (2023) - ICML
+3. "Explainable AI in Medical Diagnosis" (2023) - JMLR
+Current Projects: NIH Grant on AI for Medical Imaging, NSF Grant on Interpretable ML
+Lab: AI for Healthcare Lab, focusing on applying ML to solve real-world medical challenges...
+        """
+    )
+    
+    target_program_research = st.selectbox(
+        "Target Program/Position",
+        ["PhD Program", "Postdoc Position", "Research Collaboration", "Master's Program"],
+        key="research_target_program"
+    )
+    
+    if st.button("🚀 Generate Research Statement", use_container_width=True, key="generate_research_statement"):
+        # Validations
+        if not api_key:
+            st.error("Please enter your API key in the sidebar or set it in your .env file.")
+        elif not student_name:
+            st.error("Please enter your name in the sidebar.")
+        elif not cv_text:
+            st.error("Please paste your CV text in the sidebar.")
+        elif not prof_info_research:
+            st.error("Please paste the professor's complete information including publications.")
+        elif not selected_model:
+            st.error("Please select a model in the sidebar.")
+        else:
+            with st.spinner("Generating research statement... Please wait. Using model: " + selected_model):
+                research_statement_prompt = create_research_statement_prompt(cv_text, prof_info_research, student_name)
+                generated_research_statement = ""
+
+                if api_choice == "OpenAI" and OpenAI:
+                    generated_research_statement = get_openai_response(api_key, research_statement_prompt, model=selected_model)
+                elif api_choice == "Gemini" and genai:
+                    generated_research_statement = get_gemini_response(api_key, research_statement_prompt, model_name=selected_model)
+                elif api_choice == "Anthropic" and anthropic:
+                    generated_research_statement = get_anthropic_response(api_key, research_statement_prompt, model=selected_model)
+                else:
+                    st.error(f"{api_choice} API not available or library not loaded.")
+
+            st.subheader("📄 Generated Research Statement (LaTeX)")
+            if generated_research_statement and "Error:" not in generated_research_statement:
+                # Clean the LaTeX output
+                cleaned_research_statement = generated_research_statement.strip()
+                if cleaned_research_statement.startswith("```latex"):
+                    cleaned_research_statement = cleaned_research_statement[7:]
+                elif cleaned_research_statement.startswith("```"):
+                    cleaned_research_statement = cleaned_research_statement[3:]
+                if cleaned_research_statement.endswith("```"):
+                    cleaned_research_statement = cleaned_research_statement[:-3]
+                cleaned_research_statement = cleaned_research_statement.strip()
+
+                st.text_area("Research Statement LaTeX Code", cleaned_research_statement, height=400, key="research_statement_output")
+                st.download_button("Download Research Statement (.tex)", cleaned_research_statement, "research_statement.tex")
+                
+                # Show preview tip
+                st.info("💡 **Tip:** You can copy this LaTeX code and compile it using Overleaf, TeXstudio, or any LaTeX editor to see the formatted document.")
+                
+                # Show a sample of what the compiled document would look like
+                with st.expander("📖 Sample Document Structure Preview"):
+                    st.markdown("""
+                    When compiled, your research statement will include:
+                    - **Title and Author Information**
+                    - **Introduction** - Your research journey overview
+                    - **Research Background** - Your previous work and publications
+                    - **Current Research Interests** - Areas aligned with the professor
+                    - **Proposed Research Directions** - Specific research questions
+                    - **Alignment with Professor's Work** - Detailed connection analysis
+                    - **Future Goals** - Your research vision and collaboration potential
+                    - **Conclusion** - Summary of your research vision
+                    """)
+                    
+            elif generated_research_statement: # Contains an error message
+                st.error(generated_research_statement)
+
+with tabs[2]:
     st.header("Find Matching Professors")
     university_name = st.text_input("Enter University Name", placeholder="e.g., Stanford University")
     
@@ -1690,7 +1925,7 @@ with tabs[1]:
         if not university_name:
             st.warning("Please enter a university name.")
 
-with tabs[2]:
+with tabs[3]:
     st.header("🎓 PhD Position Finder")
     st.markdown("""
     This tool helps you find professors at a specific university and analyzes their hiring status using web search.
@@ -1943,7 +2178,7 @@ with tabs[2]:
         if not phd_university_name:
             st.warning("Please enter a university name.")
 
-with tabs[3]:
+with tabs[4]:
     st.header("🤖 Cohere Professor Finder")
     st.markdown("""
     This tool uses Cohere's AI to find professors at a specific university based on your CV profile.
@@ -2081,7 +2316,7 @@ with tabs[3]:
     else:
         st.error("Cohere service is not available. Please check that cohere_services.py is properly configured.")
 
-with tabs[4]:
+with tabs[5]:
     st.header("🌐 OpenAI Web Search Professor Finder")
     st.markdown("""
     This tool uses OpenAI's web search functionality to find professors at universities using real-time web data.
