@@ -591,7 +591,7 @@ Example: "Prospective PhD Applicant for Fall 2026 Interested in Machine Learning
 - End with your research interest that matches the professor's work
 
 **2. ADDRESSING:**
-Address the professor by their last name: "Dear Prof. [LastName]," or "Hello Dr. [LastName],"
+Address the professor by their last name: "Dear Prof. [LastName],"
 
 **3. EMAIL BODY - THREE CONNECTED SECTIONS:**
 
@@ -605,7 +605,7 @@ Address the professor by their last name: "Dear Prof. [LastName]," or "Hello Dr.
 **Section 2: Interest (Maximum 120 words) - MOST CRUCIAL SECTION**
 - **CRITICAL: Do NOT use generic or AI-generated language. This must sound human-written.**
 - Start by explaining why you are interested in the professor's research
-- Mention any current GRANT they have that aligns with your interests, or follow their recent research trends
+- Mention any current GRANT (if this mentioned on the Professor's Information) they have that aligns with your interests, or follow their recent research trends
 - Reference specific recently published papers by the professor (where they are first or last author)
 - Discuss the professor's research technically and comprehensively
 - Briefly incorporate why you are interested in this research
@@ -620,7 +620,7 @@ Address the professor by their last name: "Dear Prof. [LastName]," or "Hello Dr.
 - Be specific about your contributions and achievements
 
 **4. ATTACHMENTS:**
-End by mentioning you are attaching your CV and research statement
+End by mentioning you are attaching your CV and research statement(only if asked by the Professor otherwise it's optional)
 
 **5. CLOSING:**
 Use "Sincerely," followed by "{student_name}" (no additional signature elements)
