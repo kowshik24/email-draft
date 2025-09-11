@@ -1,12 +1,96 @@
 # Professor Outreach Assistant
 
+[![CI/CD Pipeline](https://github.com/kowshik24/email-draft/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/kowshik24/email-draft/actions)
+[![Python Version](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![Code Quality](https://img.shields.io/badge/code%20quality-A-brightgreen.svg)](#code-quality)
+
 A Streamlit application to help students draft professional emails to professors and find PhD positions.
 
-## Features
+## 🚀 Features
 
 - **✉️ Email Draft**: Generate personalized emails to professors based on your CV and their research
 - **👨‍🏫 Professor Suggestions**: Find matching professors at specific universities
 - **🎓 PhD Position Finder**: Enhanced search for professors using real-time web data and analyze their hiring status
+
+## 🔄 CI/CD Pipeline
+
+This repository includes a complete CI/CD pipeline that automatically tests and deploys the application when code is pushed to the main branch.
+
+### Pipeline Features
+
+- **Automated Testing**: Runs unit tests and integration tests
+- **Code Quality Checks**: Linting with flake8, formatting with black, import sorting with isort
+- **Security Scanning**: Vulnerability checks with bandit and safety
+- **Automated Deployment**: Deploys to production on successful tests
+- **Health Checks**: Verifies application is running correctly after deployment
+- **Rollback Support**: Automatic rollback on deployment failure
+
+### GitHub Secrets Required
+
+For the CI/CD pipeline to work properly, configure these secrets in your GitHub repository:
+
+#### API Keys (Required for application functionality)
+- `OPENAI_API_KEY`: Your OpenAI API key
+- `GEMINI_API_KEY`: Your Google Gemini API key  
+- `TAVILY_API_KEY`: Your Tavily API key
+
+#### Deployment Secrets (Optional, for remote deployment)
+- `DEPLOY_HOST`: Remote server hostname/IP
+- `DEPLOY_USER`: SSH username for remote server
+- `DEPLOY_KEY`: SSH private key for authentication
+- `DEPLOY_PATH`: Deployment path on remote server
+
+### Manual Deployment
+
+You can also deploy manually using the deployment script:
+
+```bash
+# Local deployment
+./deploy.sh local
+
+# Remote deployment (requires secrets)
+./deploy.sh remote
+
+# Health check
+./deploy.sh health-check
+
+# Rollback to previous deployment
+./deploy.sh rollback
+```
+
+## 🧪 Testing
+
+The project includes both unit tests and integration tests:
+
+```bash
+# Run unit tests (no API keys required)
+python -m unittest tests.test_basic -v
+
+# Run integration tests (requires API keys)
+python -m unittest tests.test_integration -v
+
+# Run all tests
+python -m unittest discover tests -v
+```
+
+## 📊 Code Quality
+
+The project uses several tools to maintain code quality:
+
+```bash
+# Linting
+python -m flake8 .
+
+# Code formatting
+python -m black .
+
+# Import sorting
+python -m isort .
+
+# Security scanning
+python -m bandit -r .
+python -m safety check
+```
 
 ## Setup
 

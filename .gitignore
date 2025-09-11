@@ -1,7 +1,33 @@
 venv
+.venv
 __pycache__
 *.pyc
 *.pyo
 streamlit.log
 app.pid
 .env
+
+# CI/CD artifacts
+*.tar.gz
+bandit-report.json
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+dist/
+build/
+*.egg-info/
+
+# Backup files
+*_backup_*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
