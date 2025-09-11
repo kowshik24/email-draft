@@ -126,7 +126,7 @@ def get_anthropic_response(api_key, prompt_text, model="claude-3-5-sonnet-202410
         message = client.messages.create(
             model=model,
             max_tokens=1000,
-            temperature=1,
+            temperature=0.01,
             system="You are a helpful assistant.",
             messages=[
                 {
