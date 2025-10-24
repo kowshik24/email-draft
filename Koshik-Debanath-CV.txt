@@ -1,5 +1,5 @@
 Koshik Debanath
-+8801855675763 | R koshik.debanath@gmail.com | ° LinkedIn |  GitHub |  Google Scholar |  Portfolio
+R koshik.debanath@gmail.com | Æ +8801855675763 |  Google Scholar |  Portfolio | ° LinkedIn |  GitHub
 Research Objective
 A highly motivated researcher with extensive experience in Natural Language Processing, Generative AI, and Deep
 Learning, evidenced by multiple peer-reviewed publications. Seeking to pursue a PhD to develop novel multi-modal
@@ -33,11 +33,13 @@ Approach to Bengali Language Classification,” 2025 International Conference on
 Communication Engineering (ECCE), Chittagong, Bangladesh, 2025, pp. 1-6, doi:
 10.1109/ECCE64574.2025.11013999
 • K. Debanath, S. Aich and A. Y. Srizon, “Analyzing Bot Activity and Political Discourse in the 2024 U.S.
-Presidential Election: A Machine Learning Approach to Misinformation and Manipulation,” Accepted, To appear
-in 2nd International Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025).
+Presidential Election: A Machine Learning Approach to Misinformation and Manipulation,” 2nd International
+Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025), Gazipur, Bangladesh, 2025,
+pp. 1-6, doi:10.1109/NCIM65934.2025.11160229.
 • S. Aich, K. Debanath, and A. Y. Srizon, “Distinguishing Human-Written and AI-Generated Text: A
-Comprehensive Study Using Explainable Artificial Intelligence in Text Classification,” Accepted, To appear in 2nd
-International Conference on Next-Generation Computing, IoT and Machine Learning (NCIM-2025).
+Comprehensive Study Using Explainable Artificial Intelligence in Text Classification,” 2nd International Conference
+on Next-Generation Computing, IoT and Machine Learning (NCIM-2025), Gazipur, Bangladesh, 2025, pp. 1-6, doi:
+10.1109/NCIM65934.2025.11160309.
 • K. Debanath, “Physics-Informed Neural Networks for Real-Time Anomaly Detection in Power System Dynamics,”
 Accepted, To appear in 3rd International Conference on Big Data, IoT and Machine Learning (BIM 2025).
 Experience
