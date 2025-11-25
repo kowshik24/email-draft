@@ -10,6 +10,15 @@ B.Sc. in Computer Science and Engineering CGPA: 3.27 / 4.00 Jan 2018 – Sep 202
 • Relevant Coursework: Linear Algebra, Data Structures and Algorithms, Object Oriented
 Programming, Discrete Mathematics, Database Management, Applied Statistics & Queuing Theory,
 Digital Image Processing, Neural Network and Fuzzy System, Artificial Intelligence, Data Mining
+Research Experience
+Young Learners’ Research Lab (YLRL) Rajshahi, Bangladesh
+Research Member Jan 2024 – Present
+• Conducted interdisciplinary research in NLP, Generative AI, and misinformation detection, resulting in five
+peer-reviewed publications.
+• Collaborated on projects focusing on low-resource NLP for the Bengali language, analysis of political discourse, and
+classification of AI-generated text.
+• Engaged in a collaborative environment to explore cutting-edge ML/DL applications, aligning with the lab’s
+mission to foster impactful research.
 Skills
 Languages: Python (Expert), C/C++, Java, JavaScript, SQL, MATLAB
 AI/ML Frameworks: PyTorch, TensorFlow, Keras, Scikit-learn, LangChain, Transformers, OpenCV
